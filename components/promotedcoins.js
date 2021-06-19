@@ -2,8 +2,8 @@ import Table from "./table"
 
 function promotedcoins() {
     return (
-        <div className="items-center text-center">
-            <h1 className="font-bold text-4xl">Promoted Coins</h1>
+        <div className="items-center text-justify max-w-screen-2xl mx-auto">
+            <h1 className="font-bold text-4xl ml-10">Promoted Coins</h1>
             <Table/>
         </div>
     )
