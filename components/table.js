@@ -1,4 +1,6 @@
-function table() {
+import Link from "next/link"
+
+function table( { details } ) {
     const people = [
         {
           name: 'Jane Cooper',
@@ -89,7 +91,9 @@ function table() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {people.map((person) => (
-                  <tr key={person.email}>
+                  <tr className="hover:bg-gray-400 cursor-pointer" onClick={()=>{window.location.href = "/coin/"+person.name }} key={person.email}>
+                
+                   
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">
@@ -116,7 +120,10 @@ function table() {
                         Vote
                       </a>
                     </td>
+                    
+                    
                   </tr>
+                  
                 ))}
               </tbody>
             </table>
@@ -128,3 +135,8 @@ function table() {
 }
 
 export default table
+
+
+
+
+  
