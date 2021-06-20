@@ -9,13 +9,27 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.1",
+    "firebase": "^8.6.8",
     "next": "11.0.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^3.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.0.4"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyraymege/coinShoot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyraymege/coinShoot/issues"
+  },
+  "homepage": "https://github.com/kyraymege/coinShoot#readme"
 }

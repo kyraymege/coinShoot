@@ -1,55 +1,27 @@
-import Link from "next/link"
+import { useState, useEffect } from "react";
+import { db } from "./firebase";
 
-function table( { details } ) {
-    const people = [
-        {
-          name: 'Jane Cooper',
-          title: 'Regional Paradigm Technician',
-          department: 'Optimization',
-          role: 'Admin',
-          email: 'jane.cooper@example.com',
-          image:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-        },
-        {
-            name: 'Jane Cooper',
-            title: 'Regional Paradigm Technician',
-            department: 'Optimization',
-            role: 'Admin',
-            email: 'jane.cooper@example.com',
-            image:
-              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-          },
-          {
-            name: 'Jane Cooper',
-            title: 'Regional Paradigm Technician',
-            department: 'Optimization',
-            role: 'Admin',
-            email: 'jane.cooper@example.com',
-            image:
-              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-          },
-          {
-            name: 'Jane Cooper',
-            title: 'Regional Paradigm Technician',
-            department: 'Optimization',
-            role: 'Admin',
-            email: 'jane.cooper@example.com',
-            image:
-              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-          },
-          {
-            name: 'Jane Cooper',
-            title: 'Regional Paradigm Technician',
-            department: 'Optimization',
-            role: 'Admin',
-            email: 'jane.cooper@example.com',
-            image:
-              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-          },
-      ]
-    return (
-        <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
+function table() {
+  const [coins, setCoins] = useState([]);
+  useEffect(() => {
+    db.collection("coins").onSnapshot((snapshot) =>
+      setCoins(
+        snapshot.docs.map((doc) => ({
+          coin_name: doc.data().coin_name,
+          coin_symbol: doc.data().coin_symbol,
+          coin_marketcap: doc.data().coin_marketcap,
+          coin_chain: doc.data().coin_chain,
+          coin_age: doc.data().coin_age,
+          coin_votes: doc.data().coin_votes,
+          coin_imageUri: doc.data().coin_imageUri,
+        }))
+      )
+    );
+  }, []);
+  console.log(coins)
+
+  return (
+    <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -86,44 +58,61 @@ function table( { details } ) {
                   >
                     Votes
                   </th>
-                  
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {people.map((person) => (
-                  <tr className="hover:bg-gray-400 cursor-pointer" onClick={()=>{window.location.href = "/coin/"+person.name }} key={person.email}>
-                
-                   
+                {coins.map((coin) => (
+                  <tr
+                    className="hover:bg-gray-400 cursor-pointer"
+                    onClick={() => {
+                      window.location.href = "/coin/" + coin.coin_name;
+                    }}
+                    key={coin.coin_name}
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">
-                          <img className="h-10 w-10 rounded-full" src={person.image} alt="" />
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={coin.imageUri}
+                            alt=""
+                          />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{person.name}</div>
-                          <div className="text-sm text-gray-500">{person.email}</div>
+                          <div className="text-sm font-medium text-gray-900">
+                            {coin.coin_name}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            {coin.coin_name}
+                          </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.title}</div>
-                      <div className="text-sm text-gray-500">{person.department}</div>
+                      <div className="text-sm text-gray-900">
+                        {coin.coin_name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {coin.coin_name}
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2 inline-flex text-xs leading-5  rounded-full bg-green-100 text-green-800 font-bold">
                         BSC
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.role}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {coin.coin_name}
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                      <a
+                        href="#"
+                        className="text-indigo-600 hover:text-indigo-900"
+                      >
                         Vote
                       </a>
                     </td>
-                    
-                    
                   </tr>
-                  
                 ))}
               </tbody>
             </table>
@@ -131,12 +120,7 @@ function table( { details } ) {
         </div>
       </div>
     </div>
-    )
+  );
 }
 
-export default table
-
-
-
-
-  
+export default table;
