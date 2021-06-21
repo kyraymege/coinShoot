@@ -1,10 +1,13 @@
 import '../styles/globals.css'
 import Header from "../components/header"
+import Banner from '../components/banner'
 
 function MyApp({ Component, pageProps }) {
   return(
     <div>
+      
       <Header/>
+      
   <Component {...pageProps} />
   </div>
   ) 
