@@ -19,7 +19,6 @@ function table() {
       )
     );
   }, []);
-  console.log(coins);
 
   return (
     <div className="flex flex-col max-w-screen-2xl mx-auto p-10">

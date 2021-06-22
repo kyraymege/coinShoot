@@ -33,13 +33,13 @@ function footer() {
                     <div className="w-9/12  h-0.5 bg-gray-100 rounded-full" />
                     <div className="flex justify-between items-center pt-12">
                         <div className="mr-8">
-                        <a href="https://t.me"><Image className="object-contain animate-spin mb-1" src="/telegram-logo.png" height={36} width={36} /></a>
+                        <a href="https://t.me/kyraymege" target="_blank"><Image className="object-contain animate-spin mb-1" src="/telegram-logo.png" height={36} width={36} /></a>
                         </div>
                         <div className="mr-4">
-                        <a href="https://twitter.com"><Image className="object-contain animate-spin mb-1" src="/twitter-logo.png" height={36} width={36} /></a>
+                        <a href="https://twitter.com" target="_blank"><Image className="object-contain animate-spin mb-1" src="/twitter-logo.png" height={36} width={36} /></a>
                         </div>
                         <div className="mr-4">
-                        <a href="https://twitter.com"><Image className="object-contain animate-bounce mb-1" src="/googlePlay-logo.png" height={72} width={72} /></a>
+                        <a href="#" target="_blank"><Image className="object-contain animate-bounce mb-1" src="/googlePlay-logo.png" height={72} width={72} /></a>
                         </div>
                         <div className="mr-4">
                             {/*AppStore*/}
