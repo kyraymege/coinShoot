@@ -15,7 +15,7 @@ export default function Home() {
     
       <AdvSection/>
       <Promotedcoins/>
-      <div className="items-center text-justify max-w-screen-2xl mx-auto">
+      <div className="items-center text-justify max-w-screen-2xl mx-auto mb-20">
       <h1 className="font-bold text-4xl ml-10">All Coins</h1>
       <Table/>
       <Pagination/>
