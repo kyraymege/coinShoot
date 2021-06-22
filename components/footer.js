@@ -8,14 +8,15 @@ function footer() {
                     <div>
                 <Image className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} />
                 </div>
-                    <div className="text-white flex flex-col md:items-center f-f-l pt-3">
+                    <div className="text-white flex flex-col md:items-center f-f-l pt-3 items-center">
                         <h1 className="text-2xl font-black">Tired of getting scammed ?</h1>
-                        <p className="text-xl font-semibold">We're working hard to protect you. You're at the right address.</p>
-                        <div className="md:flex items-center mt-5 md:mt-10 text-base text-color f-f-l">
+                        <p className="text-xl font-semibold text-center">We're working hard to protect you. You're at the right address.</p>
+                        <div className="md:flex items-center mt-5 md:mt-10 lg:text-base text-color f-f-l text-center mb-10">
                             <h2 className=" md:mr-6 pb-4 md:py-0 cursor-pointer">How to works ?</h2>
                             <h2 className="cursor-pointer">Newsletter</h2>
                         </div>
-                        <div className="my-6 text-base text-color f-f-l">
+                        <div className="w-3/12  h-0.5 bg-gray-100 rounded-full" />
+                        <div className="my-6 lg:text-base text-color f-f-l text-center">
                             <ul className="md:flex items-center">
                                 <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">Add Coin</li>
                                 <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">Promote</li>
@@ -31,7 +32,7 @@ function footer() {
                     </div>
                     <div className="w-9/12  h-0.5 bg-gray-100 rounded-full" />
                     <div className="flex justify-between items-center pt-12">
-                        <div className="mr-4">
+                        <div className="mr-8">
                         <a href="https://t.me"><Image className="object-contain animate-spin mb-1" src="/telegram-logo.png" height={36} width={36} /></a>
                         </div>
                         <div className="mr-4">
