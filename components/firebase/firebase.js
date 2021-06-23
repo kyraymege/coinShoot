@@ -10,10 +10,10 @@ const firebaseConfig = {
     measurementId: "G-X541DL48D4"
   };
 
-  const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+  const app = () => !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
   const db = app.firestore();
   const auth = app.auth();
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  export { db, auth, provider};
+  export { db, auth, provider,app};

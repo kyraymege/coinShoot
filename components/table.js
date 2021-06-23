@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "./firebase";
+import { db } from "../components/firebase/firebase";
 import moment from "moment";
 
 function table() {
