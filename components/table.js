@@ -20,6 +20,10 @@ function table() {
     );
   }, []);
 
+  const vote = () => {
+    console.log("voted");
+  };
+
   return (
     <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -39,7 +43,7 @@ function table() {
                     className=" px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
                   >
                     Symbol
-                  </th>                     
+                  </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
@@ -70,53 +74,80 @@ function table() {
                 {coins.map((coin) => (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
-                    onClick={() => {
-                      window.location.href = "/coin/" + coin.coin_name;
-                    }}
                     key={coin.coin_name}
                   >
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td
+                      onClick={() => {
+                        window.location.href = "/coin/" + coin.coin_name;
+                      }}
+                      className="px-6 py-4 whitespace-nowrap"
+                    >
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">
                           <img
                             className="rounded-full"
                             src={coin.coin_imageUri}
-                            height={40} width={40}
+                            height={40}
+                            width={40}
                             alt={coin.coin_name}
                           />
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
                             {coin.coin_name}
-                          </div>                          
+                          </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-8 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                            ${coin.coin_symbol}
-                          </div> 
+                    <td
+                      onClick={() => {
+                        window.location.href = "/coin/" + coin.coin_name;
+                      }}
+                      className="px-8 py-4 whitespace-nowrap"
+                    >
+                      <div className="text-sm font-medium text-gray-900">
+                        ${coin.coin_symbol}
+                      </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td
+                      onClick={() => {
+                        window.location.href = "/coin/" + coin.coin_name;
+                      }}
+                      className="px-6 py-4 whitespace-nowrap"
+                    >
                       <span className="px-2 inline-flex text-xs leading-5  rounded-full bg-green-100 text-green-800 font-bold">
                         {coin.coin_chain}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td
+                      onClick={() => {
+                        window.location.href = "/coin/" + coin.coin_name;
+                      }}
+                      className="px-6 py-4 whitespace-nowrap"
+                    >
                       <div className="text-sm text-gray-900">
                         $ {coin.coin_marketcap}
-                      </div>                      
-                    </td>                    
-                    <td className="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <div className="text-sm text-gray-900">
-                        {moment(coin.coin_age,"DD/MM/YYYY").fromNow()}
                       </div>
-                    
+                    </td>
+                    <td
+                      onClick={() => {
+                        window.location.href = "/coin/" + coin.coin_name;
+                      }}
+                      className="px-12 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      <div className="text-sm text-gray-900">
+                        {moment(coin.coin_age, "DD/MM/YYYY").fromNow()}
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                      
-                    <button className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline">↑ {coin.coin_votes}</button>
-                    
+                      <button
+                        onClick={() => {
+                          vote();
+                        }}
+                        className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
+                      >
+                        ↑ {coin.coin_votes}
+                      </button>
                     </td>
                   </tr>
                 ))}
