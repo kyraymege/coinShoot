@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/client"
+
 
 function header() {
+     const [ session , loading ] = useSession();
+
     return (
         <div className="flex flex-col sm:flex-row justify-around items-center h-auto bg-gray-900">
            <a href="/"> <Image className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} /></a>
@@ -10,6 +14,7 @@ function header() {
                 <Link href="/promote"><p className="font-bold tracking-widest cursor-pointer my-2">Promote</p></Link>
                 <Link href="/contact"><p className="font-bold tracking-widest cursor-pointer my-2">Contact</p></Link>
                 <Link href="/signin"><button className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2 shadow-lg">Sign In</button></Link>
+                <p>{session && session.user.email}</p>
             </div>
            
         </div>
