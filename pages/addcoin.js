@@ -28,6 +28,7 @@ function addcoin() {
                         type="text"
                         name="coin_name"
                         id="coin_name"
+                        required
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -44,6 +45,7 @@ function addcoin() {
                         type="text"
                         name="coin_symbol"
                         id="coin_symbol"
+                        required
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -60,6 +62,7 @@ function addcoin() {
                         type="text"
                         name="coin_logo"
                         id="coin_logo"
+                        required
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -75,6 +78,7 @@ function addcoin() {
                         placeholder="Select Chain"
                         id="coin_chain"
                         name="coin_chain"
+                        required
                         className="text-gray-700 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
                         <option>Binance Smart Chain(BSC)</option>
@@ -88,7 +92,7 @@ function addcoin() {
                         htmlFor="coin_desc"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Description *
+                        Description 
                       </label>
                       <div className="mt-1">
                         <textarea
@@ -114,6 +118,7 @@ function addcoin() {
                         type="text"
                         name="coin_smartContract"
                         id="coin_smartContract"
+                        required
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />                      
                     </div>
@@ -134,6 +139,7 @@ function addcoin() {
                           type="text"
                           name="coin_websiteAddress"
                           id="coin_websiteAddress"
+                          required
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
@@ -166,6 +172,7 @@ function addcoin() {
                           type="text"
                           name="coin_date"
                           id="coin_date"
+                          required
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
@@ -199,6 +206,7 @@ function addcoin() {
                           type="text"
                           name="coin_price"
                           id="coin_price"
+                          required
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
@@ -232,6 +240,7 @@ function addcoin() {
                           type="text"
                           name="coin_marketCap"
                           id="coin_marketCap"
+                          required
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
@@ -309,6 +318,25 @@ function addcoin() {
                           name="coin_marketCap"
                           id="coin_marketCap"
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                        />
+                      </div>
+                      
+                    </div>
+                    <div className="col-span-6 sm:col-span-6">
+                      <label
+                        htmlFor="coin_desc"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Additional Links
+                      </label>
+                      <div className="mt-1">
+                        <textarea
+                          id="coin_desc"
+                          name="coin_desc"
+                          rows={3}
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          placeholder="Ex: Bitcoin is a decentralized digital currency"
+                          defaultValue={""}
                         />
                       </div>
                     </div>

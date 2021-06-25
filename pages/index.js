@@ -3,8 +3,9 @@ import Promotedcoins from '../components/promotedcoins'
 import Pagination from '../components/pagination'
 import Table from '../components/table'
 import AdvSection from '../components/AdvSection'
+import Signin from "./signin"
 
-export default function Home() {
+export default function Home(  ) {
   return (
     <div className="">
       <Head>
@@ -25,3 +26,5 @@ export default function Home() {
     </div>
   )
 }
+
+
