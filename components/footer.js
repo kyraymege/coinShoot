@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Newsletter from "./newsletter";
 function footer() {
     return (
         <>
@@ -10,11 +10,9 @@ function footer() {
                 </div>
                     <div className="text-white flex flex-col md:items-center f-f-l pt-3 items-center">
                         <h1 className="text-2xl font-black">Tired of getting scammed ?</h1>
-                        <p className="text-xl font-semibold text-center">We're working hard to protect you. You're at the right address.</p>
-                        <div className="md:flex items-center mt-5 md:mt-10 lg:text-base text-color f-f-l text-center mb-10">
-                            <h2 className=" md:mr-6 pb-4 md:py-0 cursor-pointer">How to works ?</h2>
-                            <h2 className="cursor-pointer">Newsletter</h2>
-                        </div>
+                        <p className="text-xl font-semibold text-center mb-3">We're working hard to protect you. You're at the right address.</p>
+                        <div className="w-3/12  h-0.5 bg-gray-100 rounded-full" />
+                        <Newsletter/>
                         <div className="w-3/12  h-0.5 bg-gray-100 rounded-full" />
                         <div className="my-6 lg:text-base text-color f-f-l text-center">
                             <ul className="md:flex items-center">

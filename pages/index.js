@@ -3,7 +3,7 @@ import Promotedcoins from '../components/promotedcoins'
 import Pagination from '../components/pagination'
 import Table from '../components/table'
 import AdvSection from '../components/AdvSection'
-import Signin from "./signin"
+import Newsletter from '../components/newsletter'
 
 export default function Home(  ) {
   return (
@@ -20,6 +20,7 @@ export default function Home(  ) {
       <h1 className="font-bold text-4xl ml-10">All Coins</h1>
       <Table/>
       <Pagination/>
+      
       </div>
       
       
