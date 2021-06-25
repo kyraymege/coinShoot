@@ -1,4 +1,5 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
+import { signIn, signOut , useSession} from "next-auth/client"
 
 function signin() {
     return (
@@ -14,6 +15,7 @@ function signin() {
         </div>
         <div className="flex items-center justify-center">
         <button
+              onClick={signIn}
               type="submit"
               className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-red-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >

@@ -6,7 +6,7 @@ import moment from "moment";
 const Page = () => {
   const [coinInf, setCoinInf] = useState([
     {
-      coin_name: "",
+      coin_name: "loading...",
       coin_symbol: "loading...",
       coin_marketcap: "loading...",
       coin_chain: "loading...",
@@ -41,7 +41,7 @@ const Page = () => {
         coin_smartContractAddress: doc.data().coin_smartContractAddress,
       });
     } else {
-      console.log("deneme");
+      console.log("wait");
     }
   });
 
@@ -67,7 +67,7 @@ const Page = () => {
                     />
                   </div>
                   <div className="ml-3">
-                    <h1 className="text-gray-800 dark:text-gray-100 font-medium text-xl text-base">
+                    <h1 className="text-gray-800 dark:text-gray-100 font-medium text-xl ">
                       {coinInf.coin_name}
                     </h1>
                     <p className="text-gray-600 dark:text-gray-400 text-lg font-normal">
@@ -85,7 +85,7 @@ const Page = () => {
                   Smart Contract address                
                 </h3>
                 <div className="text-xs text-center w-full bg-gray-300 dark:text-indigo-600 rounded font-medium p-3 lg:mr-3 flex-row flex">
-                  <p className="text-gray-600 dark:text-gray-400 text-sm font-normal mr-5">
+                  <p  className="text-gray-600 dark:text-gray-400 text-sm font-normal mr-5">
                     {coinInf.coin_smartContractAddress}                    
                   </p>
                   <span onClick={()=>{getCopy()}} className="cursor-pointer hover:scale-125">
