@@ -9,7 +9,7 @@ function header() {
                 <Link href="/addcoin"><p className="font-bold tracking-widest cursor-pointer my-2">Add Coin</p></Link>
                 <Link href="/promote"><p className="font-bold tracking-widest cursor-pointer my-2">Promote</p></Link>
                 <Link href="/contact"><p className="font-bold tracking-widest cursor-pointer my-2">Contact</p></Link>
-                <Link href="/signin"><button className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2">Sign In</button></Link>
+                <Link href="/signin"><button className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2 shadow-lg">Sign In</button></Link>
             </div>
            
         </div>

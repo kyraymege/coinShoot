@@ -2,7 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
 function pagination() {
   return (
-    <div className="bg-white px-4 py-3 flex items-center  border-t border-gray-200 sm:px-6 max-w-screen-2xl mx-auto">
+    <div className="bg-white px-4 py-3 flex items-center  border-t border-gray-200 sm:px-6 max-w-screen-2xl mx-auto rounded-full">
       <div className="flex-1 flex justify-between sm:hidden">
         <a
           href="#"
