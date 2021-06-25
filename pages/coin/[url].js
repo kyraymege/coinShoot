@@ -46,14 +46,15 @@ const Page = () => {
   });
 
   const getCopy = () =>{
-    
+    const text = document.getElementById("smartContract");
+    text.select();
     document.execCommand("copy"); 
     alert("Coppied");
   }
 
   return (
     <>
-      <div className="w-full bg-gray-200 dark:bg-gray-900 py-10">
+      <div className="w-full min-h-screen bg-gray-800 dark:bg-gray-900 py-24">
         <div className="container mx-auto px-6 flex items-start justify-center">
           <div className="w-full">
             <div className="flex flex-col lg:flex-row mx-auto w-full bg-white dark:bg-gray-800 shadow rounded">
@@ -236,7 +237,7 @@ const Page = () => {
                 <div
                   className={
                     coinInf.coin_additionalLinks == "" || null
-                      ? "opacity-0 "
+                      ? "hidden "
                       : "opacity-100 ml-16"
                   }
                 >
