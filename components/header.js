@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/client"
 
 function header() {
      const [ session , loading ] = useSession();
-
+     
     return (
         <div className="flex flex-col sm:flex-row justify-around items-center h-auto bg-gray-900">
            <a href="/"> <Image className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} /></a>
@@ -19,6 +19,15 @@ function header() {
                 {session &&
                 <button onClick={()=> signOut()} className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2 shadow-lg">Logout</button>
                 }
+                {
+                    session && <p>{session.user.email}</p>
+                }
+                {   
+                    session && <img src={session.user.image}></img>
+                    }
+                    {   
+                    session && <p>{session.user.name}</p>
+                    }
             </div>
            
         </div>

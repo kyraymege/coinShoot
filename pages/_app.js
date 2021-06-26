@@ -4,8 +4,12 @@ import Header from "../components/header";
 import Banner from "../components/banner";
 import Footer from "../components/footer";
 
+
 function MyApp({ Component, pageProps }) {
   const { session } = pageProps;
+ 
+ 
+  
   return (
     <div>
       
