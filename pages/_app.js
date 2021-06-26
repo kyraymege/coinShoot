@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }) {
       
       <Provider options ={{ site:process.env.SITE}} session = {session}>
       <Header />
+    
         <Component {...pageProps} />
         < Footer />
         </Provider>
