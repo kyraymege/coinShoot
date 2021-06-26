@@ -29,7 +29,7 @@ function addcoin() {
                         name="coin_name"
                         id="coin_name"
                         required
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
@@ -46,7 +46,7 @@ function addcoin() {
                         name="coin_symbol"
                         id="coin_symbol"
                         required
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
@@ -63,7 +63,7 @@ function addcoin() {
                         name="coin_logo"
                         id="coin_logo"
                         required
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
@@ -99,7 +99,7 @@ function addcoin() {
                           id="coin_desc"
                           name="coin_desc"
                           rows={3}
-                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          className="shadow-sm text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Ex: Bitcoin is a decentralized digital currency"
                           defaultValue={""}
                         />
@@ -119,7 +119,7 @@ function addcoin() {
                         name="coin_smartContract"
                         id="coin_smartContract"
                         required
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />                      
                     </div>
 
@@ -140,7 +140,7 @@ function addcoin() {
                           name="coin_websiteAddress"
                           id="coin_websiteAddress"
                           required
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
                     </div>
@@ -173,7 +173,7 @@ function addcoin() {
                           name="coin_date"
                           id="coin_date"
                           required
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
                     </div>
@@ -207,7 +207,7 @@ function addcoin() {
                           name="coin_price"
                           id="coin_price"
                           required
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
                     </div>
@@ -241,7 +241,7 @@ function addcoin() {
                           name="coin_marketCap"
                           id="coin_marketCap"
                           required
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
                     </div>
@@ -263,9 +263,9 @@ function addcoin() {
                         <input
                           placeholder="Ex: 22/06/2021"
                           type="text"
-                          name="coin_marketCap"
-                          id="coin_marketCap"
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          name="coin_telegramAddress"
+                          id="coin_telegramAddress"
+                          className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
                     </div>
@@ -287,9 +287,9 @@ function addcoin() {
                         <input
                           placeholder="Ex: 22/06/2021"
                           type="text"
-                          name="coin_marketCap"
-                          id="coin_marketCap"
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          name="coin_TwitterAddress"
+                          id="coin_TwitterAddress"
+                          className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
                     </div>
@@ -315,26 +315,26 @@ function addcoin() {
                         <input
                           placeholder="Ex: 22/06/2021"
                           type="text"
-                          name="coin_marketCap"
-                          id="coin_marketCap"
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          name="coin_chartAddress"
+                          id="coin_chartAddress"
+                          className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         />
                       </div>
                       
                     </div>
                     <div className="col-span-6 sm:col-span-6">
                       <label
-                        htmlFor="coin_desc"
+                        htmlFor="coin_additional"
                         className="block text-sm font-medium text-gray-700"
                       >
                         Additional Links
                       </label>
                       <div className="mt-1">
                         <textarea
-                          id="coin_desc"
-                          name="coin_desc"
+                          id="coin_additional"
+                          name="coin_additional"
                           rows={3}
-                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          className="shadow-sm text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Ex: Bitcoin is a decentralized digital currency"
                           defaultValue={""}
                         />
@@ -344,7 +344,57 @@ function addcoin() {
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
                   <button
-                    type="submit"
+                    onClick={()=>{
+                      let coin_name = document.getElementById("coin_name").value;
+                      let coin_symbol = document.getElementById("coin_symbol").value;
+                      let coin_logo = document.getElementById("coin_logo").value;
+                      let coin_chain = document.getElementById("coin_chain").value;
+                      let coin_desc = document.getElementById("coin_desc").value;
+                      let coin_smartContract = document.getElementById("coin_smartContract").value;
+                      let coin_websiteAddress = document.getElementById("coin_websiteAddress").value;
+                      let coin_date = document.getElementById("coin_date").value;
+                      let coin_price = document.getElementById("coin_price").value;
+                      let coin_marketCap = document.getElementById("coin_marketCap").value;
+                      let coin_telegramAddress = document.getElementById("coin_telegramAddress").value;
+                      let coin_TwitterAddress = document.getElementById("coin_TwitterAddress").value;
+                      let coin_additional = document.getElementById("coin_additional").value;
+
+                      db.collection("coins").doc(coin_name).set({
+                        coin_name: coin_name,
+                        coin_symbol: coin_symbol,
+                        coin_logo: coin_logo,
+                        coin_chain: coin_chain,
+                        coin_description: coin_desc,
+                        coin_smartContractAddress: coin_smartContract,
+                        coin_website: coin_websiteAddress,
+                        coin_age: coin_date,
+                        coin_price: coin_price,
+                        coin_marketcap: coin_marketCap,
+                        coin_telegram: coin_telegramAddress,
+                        coin_twitter: coin_TwitterAddress,
+                        coin_additionalLinks: coin_additional,
+                    })
+                    .then(() => {
+                        alert("Coin insertion is successful. It will be listed after checks.");
+                        document.getElementById("coin_name").value="";
+                        document.getElementById("coin_symbol").value="";
+                        document.getElementById("coin_logo").value="";
+                        document.getElementById("coin_desc").value="";
+                        document.getElementById("coin_smartContract").value="";
+                        document.getElementById("coin_websiteAddress").value="";
+                        document.getElementById("coin_date").value="";
+                        document.getElementById("coin_price").value="";
+                        document.getElementById("coin_marketCap").value="";
+                        document.getElementById("coin_telegramAddress").value="";
+                        document.getElementById("coin_TwitterAddress").value="";
+                        document.getElementById("coin_additional").value="";
+                    })
+                    .catch((error) => {
+                        console.error("Error writing document: ", error);
+                    });
+                      
+                    }}
+                    type="button"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Add Coin
