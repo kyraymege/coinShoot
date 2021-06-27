@@ -426,6 +426,8 @@ function addcoin() {
                                   coin_twitter: coin_TwitterAddress,
                                   coin_additionalLinks: coin_additional,
                                   coin_owner: session.user.email,
+                                  coin_votes: 0,
+                                  coin_status: "progress",
                                 })
                                 .then(() => {
                                   alert(

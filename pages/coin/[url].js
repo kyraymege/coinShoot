@@ -161,7 +161,9 @@ const Page = () => {
                     </button>
                   </a>
                 </div>
-                <div className="ml-16">
+                <div className={coinInf.coin_telegram == "" || null
+                      ? "hidden "
+                      : "opacity-100 ml-16"}>
                   <a href={coinInf.coin_telegram} target="_blank">
                     <button
                       type="button"
@@ -185,7 +187,11 @@ const Page = () => {
                     </button>
                   </a>
                 </div>
-                <div className="ml-16">
+                <div className={
+                  coinInf.coin_twitter == "" || null
+                  ? "hidden "
+                  : "opacity-100 ml-16"
+                }>
                   <a href={coinInf.coin_twitter} target="_blank">
                     <button
                       type="button"
@@ -209,7 +215,9 @@ const Page = () => {
                     </button>
                   </a>
                 </div>
-                <div className="ml-16">
+                <div className={coinInf.coin_chart == "" || null
+                      ? "hidden "
+                      : "opacity-100 ml-16"}>
                   <a href={coinInf.coin_chart} target="_blank">
                     <button
                       type="button"
