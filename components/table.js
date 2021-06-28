@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { db } from "../components/firebase/firebase";
 import moment from "moment";
 
-function table() {
+function table( props ) {
   const [coins, setCoins] = useState([]);
   useEffect(() => {
-    db.collection("coins").onSnapshot((snapshot) =>
+    db.collection("coins").where("coin_status","==",props.status).onSnapshot((snapshot) =>
       setCoins(
         snapshot.docs.map((doc) => ({
           coin_name: doc.data().coin_name,
@@ -15,6 +15,7 @@ function table() {
           coin_age: doc.data().coin_age,
           coin_votes: doc.data().coin_votes,
           coin_imageUri: doc.data().coin_imageUri,
+          coin_status: doc.data().coin_status
         }))
       )
     );
@@ -23,7 +24,8 @@ function table() {
   const vote = () => {
     console.log("voted");
   };
-
+  
+  
   return (
     <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -71,7 +73,11 @@ function table() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.map((coin) => (
+                {coins.map( (coin) => 
+                  
+                 
+                   
+                 (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
                     key={coin.coin_name}
