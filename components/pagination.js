@@ -1,6 +1,43 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { db } from "../components/firebase/firebase";
+import { useState, useEffect } from "react";
 
 function pagination() {
+  const [coins, setCoins] = useState([]);
+  const [pag , setPag] = useState([0]);
+  useEffect(() => {
+    db.collection("coins").orderBy("coin_votes", "desc").onSnapshot((snapshot) => {
+      
+        
+      setCoins(
+        snapshot.docs.map((doc) => ({
+          coin_name: doc.data().coin_name,
+          coin_symbol: doc.data().coin_symbol,
+          coin_marketcap: doc.data().coin_marketcap,
+          coin_chain: doc.data().coin_chain,
+          coin_age: doc.data().coin_age,
+          coin_votes: doc.data().coin_votes,
+          coin_imageUri: doc.data().coin_imageUri,
+          coin_status: doc.data().coin_status
+        }))
+      )
+    }
+    );
+     var a = 0;
+    for(let i = 1; i<coins.length;i++){
+     
+      console.log(a)
+      
+       if(i%20===0){
+        
+         a+=1;
+         console.log(a);
+         pag.push(a);
+       }
+       
+    }
+  }, []);
+
   return (
     <div className="bg-white px-4 py-3 flex items-center  border-t border-gray-200 sm:px-6 max-w-screen-2xl mx-auto rounded-full">
       <div className="flex-1 flex justify-between sm:hidden">
@@ -20,8 +57,8 @@ function pagination() {
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
-            <span className="font-medium">97</span> results
+            Showing <span className="font-medium">1</span> to <span className="font-medium">{Math.floor(coins.length / 20) + 1}</span> of{' '}
+            <span className="font-medium">{coins.length}</span> results
           </p>
         </div>
         <div>
@@ -34,46 +71,19 @@ function pagination() {
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </a>
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
-            <a
-              href="#"
+    {        pag.map((a)=>(  <a
+              href={"-" + (a+1)}
+              key={a}
               aria-current="page"
               className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
             >
-              1
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              2
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              3
-            </a>
-            <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-              ...
-            </span>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              8
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              9
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              10
-            </a>
+              {a+1}
+            </a>)
+    
+              
+
+    )  }
+            
             <a
               href="#"
               className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"

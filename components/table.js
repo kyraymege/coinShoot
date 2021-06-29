@@ -4,8 +4,10 @@ import moment from "moment";
 
 function table( props ) {
   const [coins, setCoins] = useState([]);
+  
   useEffect(() => {
-    db.collection("coins").where("coin_status","==",props.status).onSnapshot((snapshot) =>
+    db.collection("coins").orderBy("coin_votes","desc").where("coin_status","==",props.status).onSnapshot((snapshot) =>{
+     
       setCoins(
         snapshot.docs.map((doc) => ({
           coin_name: doc.data().coin_name,
@@ -17,7 +19,7 @@ function table( props ) {
           coin_imageUri: doc.data().coin_imageUri,
           coin_status: doc.data().coin_status
         }))
-      )
+      )}
     );
   }, []);
 
