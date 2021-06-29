@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import { db } from "../components/firebase/firebase";
 import moment from "moment";
+import { signOut, useSession } from "next-auth/client"
 
-function table( props ) {
+function table(props) {
   const [coins, setCoins] = useState([]);
-  
+  const [votes, setVotes] = useState([]);
+  const [control , setControl] = useState(true);
+  const [session, loading] = useSession();
+  var controler = false ;
+
   useEffect(() => {
-    db.collection("coins").orderBy("coin_votes","desc").where("coin_status","==",props.status).onSnapshot((snapshot) =>{
-     
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", props.status).onSnapshot((snapshot) => {
+
       setCoins(
         snapshot.docs.map((doc) => ({
           coin_name: doc.data().coin_name,
@@ -19,15 +24,38 @@ function table( props ) {
           coin_imageUri: doc.data().coin_imageUri,
           coin_status: doc.data().coin_status
         }))
-      )}
+      )
+    }
     );
   }, []);
 
-  const vote = () => {
-    console.log("voted");
+  const vote = (currentCoin) => {
+    db.collection("votes").doc(currentCoin).get().then((coinInf) => {
+      if (control) {
+        
+         var users = coinInf.data().users
+         console.log(users)
+         for(let i = 0;i<users.length;i++){
+          if(users[i] === session.user.email){
+            alert("You are already vote");
+            controler=true;
+            break;
+          }else{
+            console.log("_________")
+          }
+        }
+        console.log(controler)
+         if(!controler){
+           alert("congrats")
+         }
+      }
+    })
+    
+
+
   };
-  
-  
+
+
   return (
     <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -75,11 +103,11 @@ function table( props ) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.map( (coin) => 
-                  
-                 
-                   
-                 (
+                {coins.map((coin) =>
+
+
+
+                (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
                     key={coin.coin_name}
@@ -150,7 +178,9 @@ function table( props ) {
                     <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                       <button
                         onClick={() => {
-                          vote();
+
+                          vote(coin.coin_name);
+                          console.log(votes.users)
                         }}
                         className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
                       >

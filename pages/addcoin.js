@@ -4,6 +4,7 @@ import { db } from "../components/firebase/firebase";
 
 function addcoin() {
   const [ session , loading ] = useSession();
+  
   return (
     <>
       <Head>
