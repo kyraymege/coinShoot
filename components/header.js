@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/client"
+import UserAvatar from "./userAvatar"
 
 
 function header() {
@@ -16,12 +17,10 @@ function header() {
                 {!session &&
                 <Link href="/signin"><button className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2 shadow-lg">Sign In</button></Link>
                 }
-                {session &&
-                <button onClick={()=> signOut()} className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2 shadow-lg">Logout</button>
+                {session && <>                
+                <UserAvatar/>
+                </>
                 }
-                   {   
-                    session && <img className="rounded-full h-12 w-12" src={session.user.image}></img>
-                    }
             </div>
            
         </div>

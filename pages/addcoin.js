@@ -429,6 +429,7 @@ function addcoin() {
                                   coin_owner: session.user.email,
                                   coin_votes: 0,
                                   coin_status: "progress",
+                                  coin_createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                                 })
                                 .then(() => {
                                   alert(

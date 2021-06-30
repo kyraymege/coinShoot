@@ -12,7 +12,6 @@ function table(props) {
 
   useEffect(() => {
     db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", props.status).onSnapshot((snapshot) => {
-
       setCoins(
         snapshot.docs.map((doc) => ({
           coin_name: doc.data().coin_name,
@@ -31,11 +30,8 @@ function table(props) {
 
   const vote = (currentCoin,votes) => {
     db.collection("votes").doc(currentCoin).get().then((voteInf) => {
-      if (control) {
-        
+      if (control) {        
          var users = voteInf.data().users
-         
-
          for(let i = 0;i<users.length;i++){
           if(users[i] === session.user.email){
             alert("You are already vote");
@@ -45,7 +41,6 @@ function table(props) {
             console.log("_________")
           }
         }
-
         console.log(controler)
          if(!controler){
            users.push(session.user.email);
@@ -60,9 +55,6 @@ function table(props) {
          }
       }
     })
-    
-
-
   };
 
 
@@ -113,11 +105,7 @@ function table(props) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.map((coin) =>
-
-
-
-                (
+                {coins.map((coin) => (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
                     key={coin.coin_name}
@@ -186,16 +174,32 @@ function table(props) {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                      <button
+                      {!session && (
+                        <>
+                          <button
                         onClick={() => {
-
-                          vote(coin.coin_name,coin.coin_votes);
-                          console.log(votes.users)
+                          alert("You must login for vote")
                         }}
                         className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
                       >
                         ↑ {coin.coin_votes}
                       </button>
+                        </>
+                      )}
+                      {session && (
+                        <>
+                          <button
+                        onClick={() => {
+                          vote(coin.coin_name, coin.coin_votes);
+                          console.log(votes.users);
+                        }}
+                        className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
+                      >
+                        ↑ {coin.coin_votes}
+                      </button>
+                        </>
+                      )}
+                      
                     </td>
                   </tr>
                 ))}
