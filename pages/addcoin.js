@@ -471,6 +471,11 @@ function addcoin() {
                                     error
                                   );
                                 });
+                                db.collection("votes")
+                                .doc(coin_name)
+                                .set({
+                                  users: [],
+                                })
                             }
                           }}
                           type="submit"

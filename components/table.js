@@ -29,12 +29,13 @@ function table(props) {
     );
   }, []);
 
-  const vote = (currentCoin) => {
-    db.collection("votes").doc(currentCoin).get().then((coinInf) => {
+  const vote = (currentCoin,votes) => {
+    db.collection("votes").doc(currentCoin).get().then((voteInf) => {
       if (control) {
         
-         var users = coinInf.data().users
-         console.log(users)
+         var users = voteInf.data().users
+         
+
          for(let i = 0;i<users.length;i++){
           if(users[i] === session.user.email){
             alert("You are already vote");
@@ -44,12 +45,18 @@ function table(props) {
             console.log("_________")
           }
         }
+
         console.log(controler)
          if(!controler){
            users.push(session.user.email);
            db.collection("votes").doc(currentCoin).set({
              users
            })
+           db.collection("coins")
+                  .doc(currentCoin)
+                  .update({
+                    coin_votes: votes + 1,
+                  });
          }
       }
     })
@@ -182,7 +189,7 @@ function table(props) {
                       <button
                         onClick={() => {
 
-                          vote(coin.coin_name);
+                          vote(coin.coin_name,coin.coin_votes);
                           console.log(votes.users)
                         }}
                         className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
