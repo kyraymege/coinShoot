@@ -46,7 +46,10 @@ function table(props) {
         }
         console.log(controler)
          if(!controler){
-           alert("congrats")
+           users.push(session.user.email);
+           db.collection("votes").doc(currentCoin).set({
+             users
+           })
          }
       }
     })
