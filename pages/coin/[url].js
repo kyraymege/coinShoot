@@ -17,7 +17,6 @@ const Page = () => {
   ]);
   const router = useRouter();
   const { url } = router.query;
-
   var query = url;
   var docRef = db.collection("coins").doc(query);
 

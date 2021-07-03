@@ -1,9 +1,10 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronLeftIcon, ChevronRightIcon, ViewBoardsIcon } from '@heroicons/react/solid'
 import { db } from "../components/firebase/firebase";
 import { useState, useEffect } from "react";
 
-function pagination() {
+function pagination( url ) {
   const [coins, setCoins] = useState([]);
+  var currentPage = 0;
   const [pag , setPag] = useState([0]);
   useEffect(() => {
     db.collection("coins").orderBy("coin_votes", "desc").onSnapshot((snapshot) => {
@@ -24,7 +25,7 @@ function pagination() {
     }
     );
      var a = 0;
-    for(let i = 1; i<coins.length;i++){
+    for(let i = 1; i<50;i++){
      
       console.log(a)
       
@@ -73,7 +74,8 @@ function pagination() {
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
     {        pag.map((a)=>(  <a
               href={"-" + (a+1)}
-              key={a}
+              onClick={()=> {currentPage =a+1}}
+              key={a+1}
               aria-current="page"
               className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
             >
@@ -85,7 +87,8 @@ function pagination() {
     )  }
             
             <a
-              href="#"
+              onClick={()=>{currentPage = pag+1}}
+              href={currentPage + 1}
               className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
             >
               <span className="sr-only">Next</span>
