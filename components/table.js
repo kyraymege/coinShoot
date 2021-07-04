@@ -3,9 +3,10 @@ import { db } from "../components/firebase/firebase";
 import moment from "moment";
 import { signOut, useSession } from "next-auth/client"
 
-function table(props) {
+function table( props ) {
   const [coins, setCoins] = useState([]);
   const [votes, setVotes] = useState([]);
+  const [filterCoins , setFilterCoins] = useState([]);
   const [control , setControl] = useState(true);
   const [session, loading] = useSession();
   var controler = false ;
@@ -26,7 +27,27 @@ function table(props) {
       )
     }
     );
+    
   }, []);
+        
+    useEffect(()=>{
+      
+       for(let i = 0;i<50;i++){
+         if(i > props.url * 20 - 20){
+             console.log(i)
+           if(i === props.url * 20){    
+             break;
+           }
+         }
+            
+       }
+        
+      
+    },[])
+   
+
+ 
+
 
   const vote = (currentCoin,votes) => {
     db.collection("votes").doc(currentCoin).get().then((voteInf) => {
