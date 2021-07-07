@@ -1,28 +1,15 @@
 function search() {
     return (
-        <>
-         <div className="py-14 px-6  md:flex items-center w-full justify-between">
-        <div className="flex md:w-1/2 justify-between items-center">
-            <div className="rounded relative w-8/12 md:w-8/12 lg:w-1/3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="text-gray-500 absolute ml-4 inset-0 m-auto icon icon-tabler icon-tabler-search" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <circle cx={10} cy={10} r={7} />
-                    <line x1={21} y1={21} x2={15} y2={15} />
+        <div class="pt-2 relative mx-auto text-gray-600">
+            <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                type="search" name="search" placeholder="Search" />
+            <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                 </svg>
-                <input className="border border-gray-100 focus:outline-none focus:border-brand rounded-full  text-sm bg-gray-100 text-gray-500 pl-12 sm:pl-10 md:pl-12 py-3 pr-4" type="text" placeholder="Search" />
-            </div>
-            <div className="flex items-center md:hidden ml-6 md:ml-0">
-                <div className="mr-2 md:mr-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 28 28" fill="none">
-                        <path d="M11.6667 5.83333C11.6667 4.54467 12.7113 3.5 14 3.5C15.2887 3.5 16.3333 4.54467 16.3333 5.83333C19.0635 7.12431 20.8584 9.81662 21 12.8333V16.3333C21.178 17.8043 22.044 19.1032 23.3333 19.8333H4.66666C5.95596 19.1032 6.82195 17.8043 7 16.3333V12.8333C7.14159 9.81662 8.93647 7.12431 11.6667 5.83333" stroke="#718096" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M10.5 19.8333V21C10.5 22.933 12.067 24.5 14 24.5C15.933 24.5 17.5 22.933 17.5 21V19.8333" stroke="#718096" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </div>
-                <img className src="https://cdn.tuk.dev/assets/components/todos/profile.png" alt="profile" srcSet />
-            </div>
-        </div>  
-        </div>  
-        </>
+            </button>
+        </div>
+
     )
 }
 
