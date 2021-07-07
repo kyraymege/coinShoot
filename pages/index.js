@@ -3,8 +3,7 @@ import Promotedcoins from '../components/promotedcoins'
 import Pagination from '../components/pagination'
 import Table from '../components/table'
 import AdvSection from '../components/AdvSection'
-import Newsletter from '../components/newsletter'
-import ToggleButton from '../components/toogleButton'
+import TabButton from '../components/tabButton'
 
 export default function Home(  ) {
   return (
@@ -18,8 +17,7 @@ export default function Home(  ) {
       <AdvSection/>
       <Promotedcoins/>
       <div className="items-center text-justify max-w-screen-2xl mx-auto mb-20">
-      <h1 className="font-bold text-4xl ml-10">All Coins</h1>
-      <ToggleButton/>
+      <TabButton/>
       <Table status = "listed"/>
       <Pagination/>
       
