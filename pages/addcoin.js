@@ -1,10 +1,10 @@
 import Head from "next/head";
-import { useSession} from "next-auth/client"
+import { useSession } from "next-auth/client"
 import { db } from "../components/firebase/firebase";
 
 function addcoin() {
-  const [ session , loading ] = useSession();
-  
+  const [session, loading] = useSession();
+
   return (
     <>
       <Head>
@@ -341,24 +341,57 @@ function addcoin() {
                               />
                             </div>
                           </div>
-                          <div className="col-span-6 sm:col-span-6">
+
+                          <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                             <label
-                              htmlFor="coin_additional"
+                              htmlFor="coin_discordAddress"
                               className="block text-sm font-medium text-gray-700"
                             >
-                              Additional Links
+                              Discord Address
                             </label>
-                            <div className="mt-1">
-                              <textarea
-                                id="coin_additional"
-                                name="coin_additional"
-                                rows={3}
-                                className="shadow-sm text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                placeholder="Ex: Bitcoin is a decentralized digital currency"
-                                defaultValue={""}
+                            <div className="mt-1 flex rounded-md shadow-sm">
+                              <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                                <img
+                                  className="w-5 h-5"
+                                  src="/discord-logo.png"
+                                ></img>
+                              </span>
+                              <input
+                                placeholder="Ex: https://discord.gg/coinshoot"
+                                type="text"
+                                name="coin_discordAddress"
+                                id="coin_discordAddress"
+                                className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                               />
                             </div>
                           </div>
+
+                          <div className="col-span-6 sm:col-span-3 lg:col-span-4">
+                            <label
+                              htmlFor="coin_buyAddress"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Coin Buy Address
+                            </label>
+                            <div className="mt-1 flex rounded-md shadow-sm">
+                              <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z" />
+                                  <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                                </svg>
+                              </span>
+                              <input
+                                placeholder="Ex: https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x0000coinShooter0000"
+                                type="text"
+                                name="coin_buyAddress"
+                                id="coin_buyAddress"
+                                className="focus:ring-indigo-500 text-gray-800 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                              />
+                            </div>
+                          </div>
+
+
+
                         </div>
                       </div>
                       <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
@@ -394,8 +427,10 @@ function addcoin() {
                             let coin_TwitterAddress = document.getElementById(
                               "coin_TwitterAddress"
                             ).value;
-                            let coin_additional =
-                              document.getElementById("coin_additional").value;
+                            let coin_discordAddress =
+                              document.getElementById("coin_discordAddress").value;
+                            let coin_buyAddress =
+                              document.getElementById("coin_buyAddress").value;
 
                             if (
                               coin_name == "" ||
@@ -419,13 +454,14 @@ function addcoin() {
                                   coin_chain: coin_chain,
                                   coin_description: coin_desc,
                                   coin_smartContractAddress: coin_smartContract,
-                                  coin_website: coin_websiteAddress,
+                                  coin_website: "https://" + coin_websiteAddress,
                                   coin_age: coin_date,
                                   coin_price: coin_price,
                                   coin_marketcap: coin_marketCap,
                                   coin_telegram: coin_telegramAddress,
                                   coin_twitter: coin_TwitterAddress,
-                                  coin_additionalLinks: coin_additional,
+                                  coin_discordAddress: coin_discordAddress,
+                                  coin_buyAddress: coin_buyAddress,
                                   coin_owner: session.user.email,
                                   coin_votes: 0,
                                   coin_status: "progress",
@@ -472,7 +508,7 @@ function addcoin() {
                                     error
                                   );
                                 });
-                                db.collection("votes")
+                              db.collection("votes")
                                 .doc(coin_name)
                                 .set({
                                   users: [],

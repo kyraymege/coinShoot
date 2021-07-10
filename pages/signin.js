@@ -1,5 +1,5 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
-import { signIn, signOut , useSession} from "next-auth/client"
+import { signIn, signOut , useSession, getSession, csrfToken, providers, Provider } from "next-auth/client"
 
 function signin() {
   const [ session , loading ] = useSession();
@@ -15,11 +15,11 @@ function signin() {
           />          
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Sign in to your account</h2>          
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center shadow-lg">
         <button
               onClick={signIn}
               type="submit"
-              className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-red-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-red-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <img src="/google-logo.png" className="h-3 w-3"></img>
@@ -60,25 +60,7 @@ function signin() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember_me"
-                name="remember_me"
-                type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Forgot your password?
-              </a>
-            </div>
-          </div>
+          
 
           <div>
             <button
@@ -90,6 +72,22 @@ function signin() {
               </span>
               Sign in
             </button>
+            <div className="flex items-center mt-3 justify-end">           
+
+            <div className="text-sm">
+              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                Forgot your password?
+              </a>
+            </div>
+          </div>
+            <div className="flex items-center mt-3 justify-center">
+              
+            <a href="#" className="font-medium text-white">
+                You don't have a account? Let's create one!
+              </a>
+              
+            </div>
+            
           </div>
         </form>
       </div>
@@ -101,3 +99,4 @@ function signin() {
 }
 
 export default signin
+

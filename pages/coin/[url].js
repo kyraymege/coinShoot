@@ -36,7 +36,8 @@ const Page = () => {
         coin_telegram: doc.data().coin_telegram,
         coin_twitter: doc.data().coin_twitter,
         coin_chart: doc.data().coin_chart,
-        coin_additionalLinks: doc.data().coin_additionalLinks,
+        coin_discordAddress: doc.data().coin_discordAddress,
+        coin_buyAddress: doc.data().coin_buyAddress,
         coin_smartContractAddress: doc.data().coin_smartContractAddress,
       });
     } else {
@@ -44,10 +45,10 @@ const Page = () => {
     }
   });
 
-  const getCopy = () =>{
+  const getCopy = () => {
     const text = document.getElementById("smartContract");
     text.select();
-    document.execCommand("copy"); 
+    document.execCommand("copy");
     alert("Coppied");
   }
 
@@ -82,13 +83,13 @@ const Page = () => {
                   {coinInf.coin_description}
                 </p>
                 <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-1">
-                  Smart Contract address                
+                  Smart Contract address
                 </h3>
                 <div className="text-xs text-center w-full bg-gray-300 dark:text-indigo-600 rounded font-medium p-3 lg:mr-3 flex-row flex">
-                  <p  className="text-gray-600 dark:text-gray-400 text-sm font-normal mr-5">
-                    {coinInf.coin_smartContractAddress}                    
+                  <p className="text-gray-600 dark:text-gray-400 text-sm font-normal mr-5">
+                    {coinInf.coin_smartContractAddress}
                   </p>
-                  <span onClick={()=>{getCopy()}} className="cursor-pointer hover:scale-125">
+                  <span onClick={() => { getCopy() }} className="cursor-pointer hover:scale-125">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5"
@@ -161,35 +162,25 @@ const Page = () => {
                   </a>
                 </div>
                 <div className={coinInf.coin_telegram == "" || null
-                      ? "hidden "
-                      : "opacity-100 ml-16"}>
+                  ? "hidden "
+                  : "opacity-100 ml-16"}>
                   <a href={coinInf.coin_telegram} target="_blank">
                     <button
                       type="button"
                       className="mb-6 relative w-3/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                      <img className="w-6 h-6" src="/telegram-logo.png"></img>
                       </span>
                       Telegram
                     </button>
                   </a>
                 </div>
+
                 <div className={
                   coinInf.coin_twitter == "" || null
-                  ? "hidden "
-                  : "opacity-100 ml-16"
+                    ? "hidden "
+                    : "opacity-100 ml-16"
                 }>
                   <a href={coinInf.coin_twitter} target="_blank">
                     <button
@@ -197,43 +188,23 @@ const Page = () => {
                       className="mb-6 relative w-3/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                      <img className="w-6 h-6" src="/twitter-logo.png"></img>
                       </span>
                       Twitter
                     </button>
                   </a>
                 </div>
                 <div className={coinInf.coin_chart == "" || null
-                      ? "hidden "
-                      : "opacity-100 ml-16"}>
+                  ? "hidden "
+                  : "opacity-100 ml-16"}>
                   <a href={coinInf.coin_chart} target="_blank">
                     <button
                       type="button"
                       className="mb-6 relative w-3/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
-                            clipRule="evenodd"
-                          />
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                         </svg>
                       </span>
                       Chart
@@ -241,36 +212,41 @@ const Page = () => {
                   </a>
                 </div>
 
-                <div
-                  className={
-                    coinInf.coin_additionalLinks == "" || null
-                      ? "hidden "
-                      : "opacity-100 ml-16"
-                  }
-                >
-                  <a href={coinInf.coin_additionalLinks} target="_blank">
+                <div className={coinInf.coin_discordAddress == "" || null
+                  ? "hidden "
+                  : "opacity-100 ml-16"}>
+                  <a href={coinInf.coin_discordAddress} target="_blank">
                     <button
                       type="button"
                       className="mb-6 relative w-3/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                        <img className="w-6 h-6" src="/discord-logo.png"></img>
                       </span>
-                      {coinInf.coin_additionalLinks}
+                      Discord
                     </button>
                   </a>
                 </div>
+
+                <div className={coinInf.coin_buyAddress == "" || null
+                  ? "hidden "
+                  : "opacity-100 ml-16"}>
+                  <a href={coinInf.coin_buyAddress} target="_blank">
+                    <button
+                      type="button"
+                      className="mb-6 relative w-3/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z" />
+                          <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                        </svg>
+                      </span>
+                      Coin Buy Address
+                    </button>
+                  </a>
+                </div>
+
               </div>
             </div>
             {/* Card code block end */}
