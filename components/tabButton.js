@@ -10,6 +10,9 @@ export default function tabButton() {
                 <li onClick={() => setActiveStatus(2)} className={activeStatus == 2 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24  text-2xl  leading-none font-bold  text-center text-gray-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-white ease-in duration-150 rounded text-2xl  leading-none text-gray-500"}>
                     Today's Best
                 </li>
+                <li onClick={() => setActiveStatus(3)} className={activeStatus == 3 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24  text-2xl  leading-none font-bold  text-center text-gray-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-white ease-in duration-150 rounded text-2xl  leading-none text-gray-500"}>
+                    Added Today
+                </li>
                 
             </ul>
             <div className="md:hidden relative w-1/2 mx-auto bg-white rounded">
