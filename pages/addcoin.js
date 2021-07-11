@@ -451,7 +451,7 @@ function addcoin() {
                                 .set({
                                   coin_name: coin_name,
                                   coin_symbol: coin_symbol,
-                                  coin_logo: coin_logo,
+                                  coin_imageUri: coin_logo,
                                   coin_chain: coin_chain,
                                   coin_description: coin_desc,
                                   coin_smartContractAddress: coin_smartContract,
