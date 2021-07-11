@@ -189,7 +189,7 @@ function addcoin() {
                                 </svg>
                               </span>
                               <input
-                                placeholder="Ex: 22/06/2021"
+                                placeholder="Ex: 22.06.2021"
                                 type="text"
                                 name="coin_date"
                                 id="coin_date"
@@ -223,7 +223,7 @@ function addcoin() {
                                 </svg>
                               </span>
                               <input
-                                placeholder="Ex: 22/06/2021"
+                                placeholder="Ex: 0.0031"
                                 type="text"
                                 name="coin_price"
                                 id="coin_price"
@@ -257,7 +257,7 @@ function addcoin() {
                                 </svg>
                               </span>
                               <input
-                                placeholder="Ex: 22/06/2021"
+                                placeholder="Ex: 155.978"
                                 type="text"
                                 name="coin_marketCap"
                                 id="coin_marketCap"
@@ -282,7 +282,7 @@ function addcoin() {
                                 ></img>
                               </span>
                               <input
-                                placeholder="Ex: 22/06/2021"
+                                placeholder="Ex: https://t.me/coinshooter"
                                 type="text"
                                 name="coin_telegramAddress"
                                 id="coin_telegramAddress"
@@ -306,7 +306,7 @@ function addcoin() {
                                 ></img>
                               </span>
                               <input
-                                placeholder="Ex: 22/06/2021"
+                                placeholder="Ex: https://twitter.com/coinshooter"
                                 type="text"
                                 name="coin_TwitterAddress"
                                 id="coin_TwitterAddress"
@@ -334,7 +334,7 @@ function addcoin() {
                                 </svg>
                               </span>
                               <input
-                                placeholder="Ex: 22/06/2021"
+                                placeholder="Ex: https://poocoin.app/tokens/0x0000coinshooter0000"
                                 type="text"
                                 name="coin_chartAddress"
                                 id="coin_chartAddress"
