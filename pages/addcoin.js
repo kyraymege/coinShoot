@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useSession } from "next-auth/client"
 import { db } from "../components/firebase/firebase";
+import firebase from 'firebase/app';
 
 function addcoin() {
   const [session, loading] = useSession();
@@ -397,7 +398,7 @@ function addcoin() {
                       <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
                         <button
                           onClick={(event) => {
-                            event.preventDefault();
+                            event.preventDefault();                            
                             let coin_name =
                               document.getElementById("coin_name").value;
                             let coin_symbol =
