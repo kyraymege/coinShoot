@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Promotedcoins from '../components/promotedcoins'
-import Pagination from '../components/pagination'
 import Table from '../components/table'
 import AdvSection from '../components/AdvSection'
 import TabButton from '../components/tabButton'
@@ -18,8 +17,7 @@ export default function Home(  ) {
       <Promotedcoins/>
       <div className="items-center text-justify max-w-screen-2xl mx-auto mb-20">
       <TabButton/>
-      <Table status = "listed"/>
-      <Pagination/>
+      <Table/>
       
       </div>
       

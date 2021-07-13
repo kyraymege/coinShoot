@@ -76,7 +76,7 @@ const Page = () => {
                     </p>
                   </div>
                 </div>
-                <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-1">
+                <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-1 whitespace-pre-line">
                   Description
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm font-normal">

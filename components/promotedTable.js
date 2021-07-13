@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { db } from "../components/firebase/firebase";
+import { db } from "./firebase/firebase";
 import moment from "moment";
-import { useSession } from "next-auth/client"
+import {useSession } from "next-auth/client"
 
-function table() {
+function promotedtable() {
   const [coins, setCoins] = useState([]);
   const [votes, setVotes] = useState([]);
-  const [lastDoc, setLastDoc] = useState();
-  const [control, setControl] = useState(true);
+  const [lastDoc , setLastDoc] = useState();
+  const [control , setControl] = useState(true);
   const [session, loading] = useSession();
-  var controler = false;
+  var controler = false ;
 
   useEffect(() => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(20).onSnapshot((snapshot) => {
-      const lastDoc = snapshot.docs[snapshot.docs.length-1];
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "promoted").limit(20).onSnapshot((snapshot) => {   
+      const lastDoc = snapshot.docs[snapshot.docs.length -1 ]; 
       setLastDoc(lastDoc);
       console.log(lastDoc)
       setCoins(
@@ -30,58 +30,37 @@ function table() {
       )
     }
     );
-
+    
   }, []);
+        
+    
 
 
-
-  const fetchMore = () => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(20).onSnapshot((snapshot) => {
-      const lastDoc = snapshot.docs[snapshot.docs.length-1];
-      setLastDoc(lastDoc);
-      console.log(lastDoc)
-      setCoins(
-        snapshot.docs.map((doc) => ({
-          coin_name: doc.data().coin_name,
-          coin_symbol: doc.data().coin_symbol,
-          coin_marketcap: doc.data().coin_marketcap,
-          coin_chain: doc.data().coin_chain,
-          coin_age: doc.data().coin_age,
-          coin_votes: doc.data().coin_votes,
-          coin_imageUri: doc.data().coin_imageUri,
-          coin_status: doc.data().coin_status
-        }))
-      )
-    })
-  }
-
-
-
-  const vote = (currentCoin, votes) => {
+  const vote = (currentCoin,votes) => {
     db.collection("votes").doc(currentCoin).get().then((voteInf) => {
-      if (control) {
-        var users = voteInf.data().users
-        for (let i = 0; i < users.length; i++) {
-          if (users[i] === session.user.email) {
+      if (control) {        
+         var users = voteInf.data().users
+         for(let i = 0;i<users.length;i++){
+          if(users[i] === session.user.email){
             alert("You are already vote");
-            controler = true;
+            controler=true;
             break;
-          } else {
+          }else{
             console.log("_________")
           }
         }
         console.log(controler)
-        if (!controler) {
-          users.push(session.user.email);
-          db.collection("votes").doc(currentCoin).set({
-            users
-          })
-          db.collection("coins")
-            .doc(currentCoin)
-            .update({
-              coin_votes: votes + 1,
-            });
-        }
+         if(!controler){
+           users.push(session.user.email);
+           db.collection("votes").doc(currentCoin).set({
+             users
+           })
+           db.collection("coins")
+                  .doc(currentCoin)
+                  .update({
+                    coin_votes: votes + 1,
+                  });
+         }
       }
     })
   };
@@ -134,7 +113,7 @@ function table() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.map((coin, index) => (
+                {coins.map((coin,index) => (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
                     key={index}
@@ -206,29 +185,29 @@ function table() {
                       {!session && (
                         <>
                           <button
-                            onClick={() => {
-                              alert("You must login for vote")
-                            }}
-                            className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
-                          >
-                            ↑ {coin.coin_votes}
-                          </button>
+                        onClick={() => {
+                          alert("You must login for vote")
+                        }}
+                        className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
+                      >
+                        ↑ {coin.coin_votes}
+                      </button>
                         </>
                       )}
                       {session && (
                         <>
                           <button
-                            onClick={() => {
-                              vote(coin.coin_name, coin.coin_votes);
-                              console.log(votes.users);
-                            }}
-                            className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
-                          >
-                            ↑ {coin.coin_votes}
-                          </button>
+                        onClick={() => {
+                          vote(coin.coin_name, coin.coin_votes);
+                          console.log(votes.users);
+                        }}
+                        className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
+                      >
+                        ↑ {coin.coin_votes}
+                      </button>
                         </>
                       )}
-
+                      
                     </td>
                   </tr>
                 ))}
@@ -237,9 +216,8 @@ function table() {
           </div>
         </div>
       </div>
-      <button className="bg-white text-black rounded-b-2xl" onClick={()=>fetchMore()}>More</button>
     </div>
   );
 }
 
-export default table;
+export default promotedtable;
