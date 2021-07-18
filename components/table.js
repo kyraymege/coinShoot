@@ -12,10 +12,9 @@ function table() {
   var controler = false;
 
   useEffect(() => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(20).onSnapshot((snapshot) => {
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(2).onSnapshot((snapshot) => {
       const lastDoc = snapshot.docs[snapshot.docs.length-1];
       setLastDoc(lastDoc);
-      console.log(lastDoc)
       setCoins(
         snapshot.docs.map((doc) => ({
           coin_name: doc.data().coin_name,
@@ -36,21 +35,20 @@ function table() {
 
 
   const fetchMore = () => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(20).onSnapshot((snapshot) => {
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(2).onSnapshot((snapshot) => {
       const lastDoc = snapshot.docs[snapshot.docs.length-1];
+      const coin = snapshot.docs.map((doc) => ({
+        coin_name: doc.data().coin_name,
+        coin_symbol: doc.data().coin_symbol,
+        coin_marketcap: doc.data().coin_marketcap,
+        coin_chain: doc.data().coin_chain,
+        coin_age: doc.data().coin_age,
+        coin_votes: doc.data().coin_votes,
+        coin_imageUri: doc.data().coin_imageUri,
+        coin_status: doc.data().coin_status
+      }));
       setLastDoc(lastDoc);
-      console.log(lastDoc)
-      setCoins(
-        snapshot.docs.map((doc) => ({
-          coin_name: doc.data().coin_name,
-          coin_symbol: doc.data().coin_symbol,
-          coin_marketcap: doc.data().coin_marketcap,
-          coin_chain: doc.data().coin_chain,
-          coin_age: doc.data().coin_age,
-          coin_votes: doc.data().coin_votes,
-          coin_imageUri: doc.data().coin_imageUri,
-          coin_status: doc.data().coin_status
-        }))
+      setCoins((coins) => [...coins,...coin]
       )
     })
   }
@@ -91,7 +89,7 @@ function table() {
     <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-b-none sm:rounded-t-lg ">
             <table className="min-w-full divide-y divide-gray-200 ">
               <thead className="bg-gray-50 ">
                 <tr>
@@ -237,7 +235,7 @@ function table() {
           </div>
         </div>
       </div>
-      <button className="bg-white text-black rounded-b-2xl" onClick={()=>fetchMore()}>More</button>
+      <button className="bg-white text-black rounded-b-2xl focus-within:outline-none" onClick={()=>fetchMore()}>Show More</button>
     </div>
   );
 }
