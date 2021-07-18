@@ -12,8 +12,8 @@ function table() {
   var controler = false;
 
   useEffect(() => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(2).onSnapshot((snapshot) => {
-      const lastDoc = snapshot.docs[snapshot.docs.length-1];
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(20).onSnapshot((snapshot) => {
+      const lastDoc = snapshot.docs[snapshot.docs.length - 1];
       setLastDoc(lastDoc);
       setCoins(
         snapshot.docs.map((doc) => ({
@@ -35,8 +35,8 @@ function table() {
 
 
   const fetchMore = () => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(2).onSnapshot((snapshot) => {
-      const lastDoc = snapshot.docs[snapshot.docs.length-1];
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(20).onSnapshot((snapshot) => {
+      const lastDoc = snapshot.docs[snapshot.docs.length - 1];
       const coin = snapshot.docs.map((doc) => ({
         coin_name: doc.data().coin_name,
         coin_symbol: doc.data().coin_symbol,
@@ -48,7 +48,7 @@ function table() {
         coin_status: doc.data().coin_status
       }));
       setLastDoc(lastDoc);
-      setCoins((coins) => [...coins,...coin]
+      setCoins((coins) => [...coins, ...coin]
       )
     })
   }
@@ -235,7 +235,7 @@ function table() {
           </div>
         </div>
       </div>
-      <button className="bg-white text-black rounded-b-2xl focus-within:outline-none" onClick={()=>fetchMore()}>Show More</button>
+      <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" onClick={() => fetchMore()}>▼ Show More ▼</button>
     </div>
   );
 }
