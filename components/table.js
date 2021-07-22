@@ -12,7 +12,7 @@ function table() {
   var controler = false;
 
   useEffect(() => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(20).onSnapshot((snapshot) => {
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(10).onSnapshot((snapshot) => {
       const lastDoc = snapshot.docs[snapshot.docs.length - 1];
       setLastDoc(lastDoc);
       setCoins(
@@ -35,7 +35,7 @@ function table() {
 
 
   const fetchMore = () => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(20).onSnapshot((snapshot) => {
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(10).onSnapshot((snapshot) => {
       const lastDoc = snapshot.docs[snapshot.docs.length - 1];
       const coin = snapshot.docs.map((doc) => ({
         coin_name: doc.data().coin_name,
