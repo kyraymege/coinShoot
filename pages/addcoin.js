@@ -279,6 +279,7 @@ function addcoin() {
                                 <img
                                   className="w-5 h-5"
                                   src="/telegram-logo.png"
+                                  alt="telegram"
                                 ></img>
                               </span>
                               <input
@@ -303,6 +304,7 @@ function addcoin() {
                                 <img
                                   className="w-5 h-5"
                                   src="/twitter-logo.png"
+                                  alt="twitter"
                                 ></img>
                               </span>
                               <input
@@ -355,6 +357,7 @@ function addcoin() {
                                 <img
                                   className="w-5 h-5"
                                   src="/discord-logo.png"
+                                  alt="discord"
                                 ></img>
                               </span>
                               <input

@@ -15,7 +15,6 @@ function promotedtable() {
     db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "promoted").limit(20).onSnapshot((snapshot) => {   
       const lastDoc = snapshot.docs[snapshot.docs.length -1 ]; 
       setLastDoc(lastDoc);
-      console.log(lastDoc)
       setCoins(
         snapshot.docs.map((doc) => ({
           coin_name: doc.data().coin_name,

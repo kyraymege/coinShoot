@@ -1,5 +1,6 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
-import { signIn, signOut , useSession, getSession, csrfToken, providers, Provider } from "next-auth/client"
+import {signIn, useSession } from "next-auth/client";
+import {Link} from "next/link";
 
 function signin() {
   const [ session , loading ] = useSession();
@@ -82,7 +83,7 @@ function signin() {
           </div>
             <div className="flex items-center mt-3 justify-center">
               
-            <a href="#" className="font-medium text-white">
+            <a href="/signup">
                 You don't have a account? Let's create one!
               </a>
               
@@ -99,4 +100,3 @@ function signin() {
 }
 
 export default signin
-

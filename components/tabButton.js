@@ -22,6 +22,7 @@ export default function tabButton() {
                         All Coins
                     </option>
                     <option className="text-sm text-gray-300">Today's Best </option>
+                    <option className="text-sm text-gray-300">Added Today </option>
                 </select>
             </div>
         </div>

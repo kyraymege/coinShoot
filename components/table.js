@@ -37,6 +37,10 @@ function table() {
   const fetchMore = () => {
     db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(10).onSnapshot((snapshot) => {
       const lastDoc = snapshot.docs[snapshot.docs.length - 1];
+      const isCollectionEmpty = snapshot.size === 0;
+      if(!isCollectionEmpty){
+
+      
       const coin = snapshot.docs.map((doc) => ({
         coin_name: doc.data().coin_name,
         coin_symbol: doc.data().coin_symbol,
@@ -49,7 +53,10 @@ function table() {
       }));
       setLastDoc(lastDoc);
       setCoins((coins) => [...coins, ...coin]
-      )
+      )}
+      else{
+        
+      }
     })
   }
 
