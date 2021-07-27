@@ -3,45 +3,27 @@ import { db } from "../components/firebase/firebase";
 import moment from "moment";
 import { useSession } from "next-auth/client"
 
+const coinsRef = db.collection("coins").orderBy("coin_votes", "desc").where("coin_status","==","listed");
 function table() {
   const [coins, setCoins] = useState([]);
   const [votes, setVotes] = useState([]);
   const [lastDoc, setLastDoc] = useState();
   const [control, setControl] = useState(true);
   const [session, loading] = useSession();
+  const [isEmpty, setIsEmpty] = useState(false);
   var controler = false;
 
   useEffect(() => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(10).onSnapshot((snapshot) => {
-      const lastDoc = snapshot.docs[snapshot.docs.length - 1];
-      setLastDoc(lastDoc);
-      setCoins(
-        snapshot.docs.map((doc) => ({
-          coin_name: doc.data().coin_name,
-          coin_symbol: doc.data().coin_symbol,
-          coin_marketcap: doc.data().coin_marketcap,
-          coin_chain: doc.data().coin_chain,
-          coin_age: doc.data().coin_age,
-          coin_votes: doc.data().coin_votes,
-          coin_imageUri: doc.data().coin_imageUri,
-          coin_status: doc.data().coin_status
-        }))
-      )
-    }
-    );
+    coinsRef.limit(10).onSnapshot((collections)=>{
+      updateState(collections);      
+    })
 
   }, []);
 
-
-
-  const fetchMore = () => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").startAfter(lastDoc).limit(10).onSnapshot((snapshot) => {
-      const lastDoc = snapshot.docs[snapshot.docs.length - 1];
-      const isCollectionEmpty = snapshot.size === 0;
-      if(!isCollectionEmpty){
-
-      
-      const coin = snapshot.docs.map((doc) => ({
+  const updateState = (collections) =>{
+    const isCollectionEmpty = collections.size === 0;
+    if(!isCollectionEmpty){
+    const coinList = collections.docs.map((doc)=> ({
         coin_name: doc.data().coin_name,
         coin_symbol: doc.data().coin_symbol,
         coin_marketcap: doc.data().coin_marketcap,
@@ -50,20 +32,27 @@ function table() {
         coin_votes: doc.data().coin_votes,
         coin_imageUri: doc.data().coin_imageUri,
         coin_status: doc.data().coin_status
-      }));
-      setLastDoc(lastDoc);
-      setCoins((coins) => [...coins, ...coin]
-      )}
-      else{
-        
-      }
+    }))
+    const lastDoc = collections.docs[collections.docs.length - 1];
+    setCoins(coins => [...coins,...coinList]);
+    setLastDoc(lastDoc);
+  }else{
+    setIsEmpty(true);
+  }
+  }
+
+  const fetchMore = () =>{
+    coinsRef.startAfter(lastDoc).limit(10).get().then((collections)=>{
+      updateState(collections);
     })
   }
 
-
+  if(coins.length===0){
+    return <h1>Loading...</h1>;
+  }
 
   const vote = (currentCoin, votes) => {
-    db.collection("votes").doc(currentCoin).get().then((voteInf) => {
+    db.collection("votes").doc(currentCoin).onSnapshot((voteInf) => {
       if (control) {
         var users = voteInf.data().users
         for (let i = 0; i < users.length; i++) {
@@ -242,7 +231,8 @@ function table() {
           </div>
         </div>
       </div>
-      <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" onClick={() => fetchMore()}>▼ Show More ▼</button>
+      {isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none"  disabled="disabled">ᐅ All coins are listed ᐊ</button> }
+      {!isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" onClick={() => fetchMore()}>▼ Show More ▼</button>}
     </div>
   );
 }

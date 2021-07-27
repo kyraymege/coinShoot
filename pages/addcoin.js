@@ -401,7 +401,7 @@ function addcoin() {
                       <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
                         <button
                           onClick={(event) => {
-                            event.preventDefault();                            
+                            event.preventDefault();
                             let coin_name =
                               document.getElementById("coin_name").value;
                             let coin_symbol =
@@ -430,6 +430,9 @@ function addcoin() {
                             ).value;
                             let coin_TwitterAddress = document.getElementById(
                               "coin_TwitterAddress"
+                            ).value;
+                            let coin_chartAddress = document.getElementById(
+                              "coin_chartAddress"
                             ).value;
                             let coin_discordAddress =
                               document.getElementById("coin_discordAddress").value;
@@ -470,6 +473,7 @@ function addcoin() {
                                   coin_votes: 0,
                                   coin_status: "progress",
                                   coin_createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                                  coin_chart: coin_chartAddress,
                                 })
                                 .then(() => {
                                   alert(
@@ -503,7 +507,13 @@ function addcoin() {
                                     "coin_TwitterAddress"
                                   ).value = "";
                                   document.getElementById(
-                                    "coin_additional"
+                                    "coin_discordAddress"
+                                  ).value = "";
+                                  document.getElementById(
+                                    "coin_buyAddress"
+                                  ).value = "";
+                                  document.getElementById(
+                                    "coin_chartAddress"
                                   ).value = "";
                                 })
                                 .catch((error) => {
