@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/client"
+import { useSession, signIn } from "next-auth/client"
 import UserAvatar from "./userAvatar"
 import { useState, useEffect } from "react"
 import { db } from "../components/firebase/firebase";
@@ -95,7 +95,7 @@ function header() {
                 <Link href="/promote"><p className="font-bold tracking-widest cursor-pointer my-2 md:my-2">Promote</p></Link>
                 <Link href="/contact"><p className="font-bold tracking-widest cursor-pointer my-2 md:my-2">Contact</p></Link>
                 {!session &&
-                    <Link href="/signin"><button className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2 shadow-lg">Sign In</button></Link>
+                    <button onClick={signIn} className="bg-blue-600 hover:bg-blue-300 font-bold w-24 h-10 rounded-md my-2 shadow-lg">Sign In</button>
                 }
                 {session && <>
                     <UserAvatar />
