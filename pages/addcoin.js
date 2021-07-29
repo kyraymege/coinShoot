@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useSession,signIn } from "next-auth/client"
+import { useSession, signIn } from "next-auth/client"
 import { db } from "../components/firebase/firebase";
 import firebase from 'firebase/app';
 
@@ -16,13 +16,15 @@ function addcoin() {
       {!session && (
         <>
           <div className="w-full min-h-screen py-20 flex  justify-center">
-              <button
+            <div>
+            <button
               onClick={signIn}
-                type="button"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                you must login for add coin
-              </button>
+              type="button"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              you must login for add coin
+            </button>
+            </div>
           </div>
         </>
       )}
