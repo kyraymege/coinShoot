@@ -9,6 +9,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.0",
     "@heroicons/react": "^1.0.1",
     "@next-auth/firebase-adapter": "^0.1.2",
     "@tailwindcss/forms": "^0.3.3",
