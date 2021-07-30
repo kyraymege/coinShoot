@@ -2,16 +2,43 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/client"
 import UserAvatar from "./userAvatar"
-import {useState} from "react"
+import { useState, useEffect } from "react"
+import { db } from "../components/firebase/firebase";
 
 function header() {
     const [session, loading] = useSession();
-    const [searchBar , setSearchBar] = useState(false);
-    const [coins , setCoins] = useState([]);
-    const [text , setText] = useState();
+    const [searchBar, setSearchBar] = useState(false);
+    const [coins, setCoins] = useState([]);
+    const [text, setText] = useState([]);
+    const [filteredCoins, setFilteredCoins] = useState([]);
+
+    useEffect(() => {
+        db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").onSnapshot((collections) => {
+            const coinList = collections.docs.map((doc) => ({
+                coin_name: doc.data().coin_name,
+                coin_symbol: doc.data().coin_symbol,
+                coin_imageUri: doc.data().coin_imageUri,
+            }));
+            setCoins(coinList);
+        });
+
+    }, [])
+
+
     const Search = (e) => {
         setSearchBar(true)
-        
+        setText(e);
+        setFilteredCoins(
+            coins.filter(function (value) {
+                if (text === "") {
+                    return value;
+                } else if (
+                    value.coin_name.toLowerCase().includes(text.toString().toLowerCase()) ||
+                    value.coin_symbol.toLowerCase().includes(text.toString().toLowerCase())
+                ) { return value }
+
+            }))
+
     }
     return (
         <div className="flex flex-col md:flex-row sm:flex-row justify-evenly items-center h-auto bg-gray-900">
