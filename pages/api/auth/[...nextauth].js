@@ -24,6 +24,9 @@ export default NextAuth({
      })
      
   ],
+  pages: {
+    signIn: "/signin",
+  },
   adapter: FirebaseAdapter(db),
 
 })

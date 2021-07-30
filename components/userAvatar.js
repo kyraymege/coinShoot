@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/client"
 function Index() {
     const [show, setshow] = useState(false);
     const [ session , loading ] = useSession();
+    const name = (session.user.email).indexOf("@");
     return (
       <>
         <div className="px-6 flex flex-col items-start sm:items-center sm:flex-row flex-wrap">
@@ -35,16 +36,37 @@ function Index() {
               </ul>
             )}
             <div className="w-12 h-12 bg-cover rounded mr-3">
-              <img
+              {
+                !session.user.image &&
+                <img
+                src="/avatar.png"
+                className="rounded h-full w-full overflow-hidden shadow"
+                alt
+              />
+              }              
+              {
+                session.user.image &&
+                <img
                 src={session.user.image}
                 className="rounded h-full w-full overflow-hidden shadow"
                 alt
               />
+              }
             </div>
             <div className="flex items-center">
-              <p className="text-white dark:text-gray-100 text-base font-medium">
+            {
+                !session.user.name &&
+                <p className="text-white dark:text-gray-100 text-base font-medium">
+                {(session.user.email).substring(0,name)}
+              </p>
+              }
+              {
+                session.user.image &&
+                <p className="text-white dark:text-gray-100 text-base font-medium">
                 {session.user.name}
               </p>
+              }
+              
               <div
                 className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400"
                 onClick={() => setshow(!show)}
