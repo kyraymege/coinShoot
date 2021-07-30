@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useSession } from "next-auth/client"
+import { useSession, signIn } from "next-auth/client"
 import { db } from "../components/firebase/firebase";
 import firebase from 'firebase/app';
 
@@ -16,14 +16,15 @@ function addcoin() {
       {!session && (
         <>
           <div className="w-full min-h-screen py-20 flex  justify-center">
-            <a href="/signin">
-              <button
-                type="button"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                you must login for add coin
-              </button>
-            </a>
+            <div>
+            <button
+              onClick={signIn}
+              type="button"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              you must login for add coin
+            </button>
+            </div>
           </div>
         </>
       )}
@@ -401,7 +402,7 @@ function addcoin() {
                       <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
                         <button
                           onClick={(event) => {
-                            event.preventDefault();                            
+                            event.preventDefault();
                             let coin_name =
                               document.getElementById("coin_name").value;
                             let coin_symbol =
@@ -430,6 +431,9 @@ function addcoin() {
                             ).value;
                             let coin_TwitterAddress = document.getElementById(
                               "coin_TwitterAddress"
+                            ).value;
+                            let coin_chartAddress = document.getElementById(
+                              "coin_chartAddress"
                             ).value;
                             let coin_discordAddress =
                               document.getElementById("coin_discordAddress").value;
@@ -470,6 +474,7 @@ function addcoin() {
                                   coin_votes: 0,
                                   coin_status: "progress",
                                   coin_createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                                  coin_chart: coin_chartAddress,
                                 })
                                 .then(() => {
                                   alert(
@@ -503,7 +508,13 @@ function addcoin() {
                                     "coin_TwitterAddress"
                                   ).value = "";
                                   document.getElementById(
-                                    "coin_additional"
+                                    "coin_discordAddress"
+                                  ).value = "";
+                                  document.getElementById(
+                                    "coin_buyAddress"
+                                  ).value = "";
+                                  document.getElementById(
+                                    "coin_chartAddress"
                                   ).value = "";
                                 })
                                 .catch((error) => {

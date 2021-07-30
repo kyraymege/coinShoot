@@ -3,9 +3,9 @@ import { db } from "../components/firebase/firebase";
 import moment from "moment";
 import { useSession } from "next-auth/client"
 
+const coinsRef = db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed");
 function table() {
   const [coins, setCoins] = useState([]);
-  const [votes, setVotes] = useState([]);
   const [lastDoc, setLastDoc] = useState();
   const [control, setControl] = useState(true);
   const [session, loading] = useSession();
@@ -56,6 +56,9 @@ function table() {
    setList(list + 10)
  }
 
+  if (coins.length === 0) {
+    return <h1>Loading...</h1>;
+  }
 
   const vote = (currentCoin, votes) => {
     db.collection("votes").doc(currentCoin).onSnapshot((voteInf) => {
@@ -72,10 +75,8 @@ function table() {
             controler = true;
             break;
           } else {
-            console.log("_________")
           }
         }
-        console.log(controler)
         if (!controler) {
           users.push(session.user.email);
           db.collection("votes").doc(currentCoin).set({
@@ -95,7 +96,30 @@ function table() {
 
   return (
     <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
-      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div className="mx-auto container py-8 px-4 flex items-center justify-center w-full">
+        <ul className="w-full hidden md:flex items-center pb-2 border-b border-gray-200">
+          <li onClick={() => setActiveStatus(1)} className={activeStatus == 1 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded font-bold  text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer  bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+            All Coins 📢
+          </li>
+          <li onClick={() => setActiveStatus(2)} className={activeStatus == 2 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+            Today's Best 🔥
+          </li>
+          <li onClick={() => setActiveStatus(3)} className={activeStatus == 3 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+            Today Added 🆕
+          </li>
+        </ul>
+        <div className="md:hidden relative w-11/12 mx-auto bg-white rounded">
+          <select aria-label="Selected tab" className="form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10">
+            <option selected className="text-sm text-gray-600">
+              All Coins 📢
+            </option>
+            <option className="text-sm text-gray-600">Today's Best 🔥 </option>
+            <option className="text-sm text-gray-600">Today Added 🆕 </option>
+          </select>
+        </div>
+      </div>
+
+      <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-b-none sm:rounded-t-lg ">
             <table className="min-w-full divide-y divide-gray-200 ">
@@ -105,7 +129,12 @@ function table() {
                     scope="col"
                     className=" font-bold px-12 py-3 text-left text-xs text-gray-500 uppercase tracking-wider"
                   >
-                    Coin Name
+                    <div className="shadow-md flex flex-grow items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-lg focus-within:text-gray-600 focus-within:shadow-xl">
+                      <input className="outline-none flex-grow border-0 focus:outline-none px-5 text-base bg-transparent mr-2" type="text" placeholder="Search" value={text} onChange={(e)=> setText(e.target.value)} />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                      </svg>
+                    </div>
                   </th>
                   <th
                     scope="col"
@@ -140,7 +169,15 @@ function table() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.map((coin, index) => (
+                {coins.filter(val=>{
+                  if(text === ""){
+                    return val;
+                  }else if(
+                     val.coin_name.toLowerCase().includes(text.toLowerCase()) ||
+                     val.coin_symbol.toLowerCase().includes(text.toLowerCase())
+                  )
+                  return val
+                }).map((coin, index) => (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
                     key={index}
@@ -226,7 +263,6 @@ function table() {
                           <button
                             onClick={() => {
                               vote(coin.coin_name, coin.coin_votes);
-                              console.log(votes.users);
                             }}
                             className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
                           >
@@ -243,8 +279,11 @@ function table() {
           </div>
         </div>
       </div>
-      <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" onClick={() => fetchMore()}>▼ Show More ▼</button>
+      {isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" disabled="disabled">ᐅ All coins are listed ᐊ</button>}
+      {!isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" onClick={() => fetchMore()}>▼ Show More ▼</button>}
+
     </div>
+
   );
 }
 
