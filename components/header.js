@@ -8,6 +8,7 @@ function header() {
     const [session, loading] = useSession();
     const [searchBar , setSearchBar] = useState(false);
     const [coins , setCoins] = useState([]);
+    const [text , setText] = useState();
     const Search = (e) => {
         setSearchBar(true)
         

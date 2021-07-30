@@ -24,7 +24,7 @@ function table() {
         coin_chain: doc.data().coin_chain,
         coin_age: doc.data().coin_age,
         coin_votes: doc.data().coin_votes,
-        coin_imageUri: doc.data().coin_imageUri,
+        coin_imageUri: doc.data().coin_imag1eUri,
         coin_status: doc.data().coin_status
       }));
     setCoins(coinList);
