@@ -9,21 +9,14 @@ function table() {
   const [lastDoc, setLastDoc] = useState();
   const [control, setControl] = useState(true);
   const [session, loading] = useSession();
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [activeStatus, setActiveStatus] = useState(1);
-  const [text, setText] = useState("");
+  const [change, setChange] = useState(1);
+  const [list , setList] = useState(10);
   var controler = false;
+  
 
   useEffect(() => {
-    coinsRef.limit(10).onSnapshot((collections) => {
-      updateState(collections);
-    })
-
-  }, []);
-
-  const updateState = (collections) => {
-    const isCollectionEmpty = collections.size === 0;
-    if (!isCollectionEmpty) {
+     db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(list).onSnapshot((collections) => {
+      console.log("selam")
       const coinList = collections.docs.map((doc) => ({
         coin_name: doc.data().coin_name,
         coin_symbol: doc.data().coin_symbol,
@@ -33,36 +26,52 @@ function table() {
         coin_votes: doc.data().coin_votes,
         coin_imageUri: doc.data().coin_imageUri,
         coin_status: doc.data().coin_status
-      }))
-      const lastDoc = collections.docs[collections.docs.length - 1];
-      setCoins(coins => [...coins, ...coinList]);
-      setLastDoc(lastDoc);
-    } else {
-      setIsEmpty(true);
+      }));
+    setCoins(coinList);
     }
-  }
+    
+    );
+     console.log(coins);
+  },[])
 
-  const fetchMore = () => {
-    coinsRef.startAfter(lastDoc).limit(10).get().then((collections) => {
-      updateState(collections);
-    })
-  }
+  useEffect(() => {
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").limit(list).get().then((collections) => {
+      const coinList = collections.docs.map((doc) => ({
+         coin_name: doc.data().coin_name,
+         coin_symbol: doc.data().coin_symbol,
+         coin_marketcap: doc.data().coin_marketcap,
+         coin_chain: doc.data().coin_chain,
+         coin_age: doc.data().coin_age,
+         coin_votes: doc.data().coin_votes,
+         coin_imageUri: doc.data().coin_imageUri,
+         coin_status: doc.data().coin_status
+       }));
+     setCoins(coinList);
+     });
+ 
+ 
+  });
+
+ const fetchMore = () =>{
+   setList(list + 10)
+ }
 
   if (coins.length === 0) {
     return <h1>Loading...</h1>;
   }
 
   const vote = (currentCoin, votes) => {
-    db.collection("votes").doc(currentCoin).get().then((voteInf) => {
+    db.collection("votes").doc(currentCoin).onSnapshot((voteInf) => {
       if (control) {
         var users = voteInf.data().users
         for (let i = 0; i < users.length; i++) {
           if (users[i] === session.user.email) {
+            console.log("zaten vermişsin");
             db.collection("coins")
-              .doc(currentCoin)
-              .update({
-                coin_votes: votes - 1,
-              });
+            .doc(currentCoin)
+            .update({
+              coin_votes: votes + -1,
+            });
             controler = true;
             break;
           } else {
@@ -78,6 +87,7 @@ function table() {
             .update({
               coin_votes: votes + 1,
             });
+           console.log("oy verildi");
         }
       }
     })
