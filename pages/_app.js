@@ -7,19 +7,18 @@ import Footer from "../components/footer";
 
 function MyApp({ Component, pageProps }) {
   const { session } = pageProps;
- 
- 
-  
+
+
+
   return (
     <div>
-      
-      <Provider options ={{ site:process.env.SITE}} session = {session}>
-      <Header />
-    
+
+      <Provider session={pageProps.session}>
+        <Header />
         <Component {...pageProps} />
         < Footer />
-        </Provider>
-      
+      </Provider>
+
     </div>
   );
 }
