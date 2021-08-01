@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import { db } from "../components/firebase/firebase";
 import moment from "moment";
-import { useSession } from "next-auth/client"
+import { useSession } from "next-auth/client";
+import { useRouter } from 'next/router';
 
 const coinsRef = db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed");
 function table() {
+  const router = useRouter();
   const [coins, setCoins] = useState([]);
   const [lastDoc, setLastDoc] = useState();
-  const [control, setControl] = useState(true);
-  const [session, loading] = useSession();
   const [isEmpty, setIsEmpty] = useState(false);
   const [activeStatus, setActiveStatus] = useState(1);
   const [text, setText] = useState("");
-  var controler = false;
 
   useEffect(() => {
     coinsRef.limit(10).onSnapshot((collections) => {
@@ -52,36 +51,6 @@ function table() {
     return <h1>Loading...</h1>;
   }
 
-  const vote = (currentCoin, votes) => {
-    db.collection("votes").doc(currentCoin).get().then((voteInf) => {
-      if (control) {
-        var users = voteInf.data().users
-        for (let i = 0; i < users.length; i++) {
-          if (users[i] === session.user.email) {
-            db.collection("coins")
-              .doc(currentCoin)
-              .update({
-                coin_votes: votes - 1,
-              });
-            controler = true;
-            break;
-          } else {
-          }
-        }
-        if (!controler) {
-          users.push(session.user.email);
-          db.collection("votes").doc(currentCoin).set({
-            users
-          })
-          db.collection("coins")
-            .doc(currentCoin)
-            .update({
-              coin_votes: votes + 1,
-            });
-        }
-      }
-    })
-  };
 
 
   return (
@@ -120,7 +89,7 @@ function table() {
                     className=" font-bold px-12 py-3 text-left text-xs text-gray-500 uppercase tracking-wider"
                   >
                     <div className="shadow-md flex flex-grow items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-lg focus-within:text-gray-600 focus-within:shadow-xl">
-                      <input className="outline-none flex-grow border-0 focus:outline-none px-5 text-base bg-transparent mr-2" type="text" placeholder="Search" value={text} onChange={(e)=> setText(e.target.value)} />
+                      <input className="outline-none flex-grow border-0 focus:outline-none px-5 text-base bg-transparent mr-2" type="text" placeholder="Search" value={text} onChange={(e) => setText(e.target.value)} />
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                       </svg>
@@ -159,14 +128,14 @@ function table() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.filter(val=>{
-                  if(text === ""){
+                {coins.filter(val => {
+                  if (text === "") {
                     return val;
-                  }else if(
-                     val.coin_name.toLowerCase().includes(text.toLowerCase()) ||
-                     val.coin_symbol.toLowerCase().includes(text.toLowerCase())
+                  } else if (
+                    val.coin_name.toLowerCase().includes(text.toLowerCase()) ||
+                    val.coin_symbol.toLowerCase().includes(text.toLowerCase())
                   )
-                  return val
+                    return val
                 }).map((coin, index) => (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
@@ -174,7 +143,7 @@ function table() {
                   >
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-6 py-4 whitespace-nowrap"
                     >
@@ -197,7 +166,7 @@ function table() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-8 py-4 whitespace-nowrap"
                     >
@@ -207,7 +176,7 @@ function table() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-6 py-4 whitespace-nowrap"
                     >
@@ -217,7 +186,7 @@ function table() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-6 py-4 whitespace-nowrap"
                     >
@@ -227,7 +196,7 @@ function table() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-12 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
@@ -236,31 +205,18 @@ function table() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                      {!session && (
-                        <>
-                          <button
-                            onClick={() => {
-                              alert("You must login for vote")
-                            }}
-                            className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
-                          >
-                            ↑ {coin.coin_votes}
-                          </button>
-                        </>
-                      )}
-                      {session && (
-                        <>
-                          <button
-                            onClick={() => {
-                              vote(coin.coin_name, coin.coin_votes);
-                            }}
-                            className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
-                          >
-                            ↑ {coin.coin_votes}
-                          </button>
-                        </>
-                      )}
-
+                      <div className="inline-flex">
+                        <button
+                        onClick={() => router.push(`/coin/${coin.coin_name}`)}
+                        className="bg-gray-300 hover:bg-gray-200 text-blue-600 font-bold py-2 px-4 rounded-l">
+                          {coin.coin_votes}
+                        </button>
+                        <button 
+                        onClick={() => router.push(`/coin/${coin.coin_name}`)}
+                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-r">
+                          VOTE
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

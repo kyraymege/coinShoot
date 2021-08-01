@@ -31,7 +31,7 @@ function signin({ csrfToken }) {
                 
                 <button
                     onClick={() => signIn("google")}
-                    className="mt-12 bg-white transition text-xl font-bold duration-150 ease-in-out focus:outline-none hover:bg-gray-100 rounded text-indigo-700 px-6 py-2">
+                    className="mt-12 bg-white transition text-xl font-bold duration-150 ease-in-out focus:outline-none hover:bg-gray-100 rounded text-indigo-700 px-6 py-2 ">
                     <img className="w-8 h-8" src="/google-logo.png" alt="google-logo" /></button>
             </div>
         </section>

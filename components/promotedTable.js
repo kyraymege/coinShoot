@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
 import { db } from "./firebase/firebase";
 import moment from "moment";
-import {useSession } from "next-auth/client"
+import { useSession } from "next-auth/client"
+import { useRouter } from 'next/router';
 
 function promotedtable() {
   const [coins, setCoins] = useState([]);
-  const [votes, setVotes] = useState([]);
-  const [lastDoc , setLastDoc] = useState();
-  const [control , setControl] = useState(true);
-  const [session, loading] = useSession();
-  var controler = false ;
+  const [lastDoc, setLastDoc] = useState();
+  const router = useRouter();
 
   useEffect(() => {
-    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "promoted").limit(20).onSnapshot((snapshot) => {   
-      const lastDoc = snapshot.docs[snapshot.docs.length -1 ]; 
+    db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "promoted").limit(20).onSnapshot((snapshot) => {
+      const lastDoc = snapshot.docs[snapshot.docs.length - 1];
       setLastDoc(lastDoc);
       setCoins(
         snapshot.docs.map((doc) => ({
@@ -29,40 +27,8 @@ function promotedtable() {
       )
     }
     );
-    
+
   }, []);
-        
-    
-
-
-  const vote = (currentCoin,votes) => {
-    db.collection("votes").doc(currentCoin).get().then((voteInf) => {
-      if (control) {        
-         var users = voteInf.data().users
-         for(let i = 0;i<users.length;i++){
-          if(users[i] === session.user.email){
-            alert("You are already vote");
-            controler=true;
-            break;
-          }else{
-            console.log("_________")
-          }
-        }
-        console.log(controler)
-         if(!controler){
-           users.push(session.user.email);
-           db.collection("votes").doc(currentCoin).set({
-             users
-           })
-           db.collection("coins")
-                  .doc(currentCoin)
-                  .update({
-                    coin_votes: votes + 1,
-                  });
-         }
-      }
-    })
-  };
 
 
   return (
@@ -112,14 +78,14 @@ function promotedtable() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.map((coin,index) => (
+                {coins.map((coin, index) => (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
                     key={index}
                   >
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-6 py-4 whitespace-nowrap"
                     >
@@ -142,7 +108,7 @@ function promotedtable() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-8 py-4 whitespace-nowrap"
                     >
@@ -152,7 +118,7 @@ function promotedtable() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-6 py-4 whitespace-nowrap"
                     >
@@ -162,7 +128,7 @@ function promotedtable() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-6 py-4 whitespace-nowrap"
                     >
@@ -172,7 +138,7 @@ function promotedtable() {
                     </td>
                     <td
                       onClick={() => {
-                        window.location.href = "/coin/" + coin.coin_name;
+                        router.push("/coin/" + coin.coin_name);
                       }}
                       className="px-12 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
@@ -181,32 +147,15 @@ function promotedtable() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                      {!session && (
-                        <>
-                          <button
-                        onClick={() => {
-                          alert("You must login for vote")
-                        }}
-                        className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
-                      >
-                        ↑ {coin.coin_votes}
-                      </button>
-                        </>
-                      )}
-                      {session && (
-                        <>
-                          <button
-                        onClick={() => {
-                          vote(coin.coin_name, coin.coin_votes);
-                          console.log(votes.users);
-                        }}
-                        className="bg-white text-blue-600 border-2 border-blue-600  hover:bg-blue-600 hover:text-white hover:border-none font-bold w-24 h-10 rounded-md items-baseline"
-                      >
-                        ↑ {coin.coin_votes}
-                      </button>
-                        </>
-                      )}
-                      
+                      <div className="inline-flex">
+                        <button className="bg-gray-300 hover:bg-gray-200 text-blue-600 font-bold py-2 px-4 rounded-l">
+                          {coin.coin_votes}
+                        </button>
+                        <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-r">
+                          VOTE
+                        </button>
+                      </div>
+
                     </td>
                   </tr>
                 ))}

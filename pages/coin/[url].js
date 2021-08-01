@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { db } from "../../components/firebase/firebase";
 import moment from "moment";
+import { useSession } from "next-auth/client";
 
 const Page = () => {
   const [coinInf, setCoinInf] = useState([
@@ -15,12 +16,15 @@ const Page = () => {
       coin_imageUri: "loading...",
     },
   ]);
+  const [session, loading] = useSession();
   const router = useRouter();
   const { url } = router.query;
   var query = url;
-  var docRef = db.collection("coins").doc(query);
+  const docRef = db.collection("coins").doc(query);
+  var isVoted = false;
 
-  docRef.get().then((doc) => {
+
+  docRef.onSnapshot((doc) => {
     if (doc.data()) {
       setCoinInf({
         coin_name: doc.data().coin_name,
@@ -40,9 +44,7 @@ const Page = () => {
         coin_buyAddress: doc.data().coin_buyAddress,
         coin_smartContractAddress: doc.data().coin_smartContractAddress,
       });
-    } else {
-      console.log("wait");
-    }
+    } 
   });
 
   const getCopy = () => {
@@ -51,6 +53,33 @@ const Page = () => {
     document.execCommand("copy");
     alert("Coppied");
   }
+
+  const upVote = (currentCoin,currentCoinVotes) => {
+    db.collection("votes").doc(currentCoin).get().then((doc) => {
+      var users = doc.data().users;
+      for (let i = 0; i < users.length ; i++) {
+        if (users[i] === session.user.email) {
+          isVoted = true;
+        } else {
+          isVoted = false;
+        }
+      }
+      if(isVoted){
+        alert("You can vote once.")
+      }else{
+        users.push(session.user.email);
+        db.collection("votes").doc(currentCoin).set({
+          users
+        }
+        );
+        db.collection("coins").doc(currentCoin).update({
+          coin_votes: currentCoinVotes +1,
+        });
+      }
+    })
+    
+  }
+
 
   return (
     <>
@@ -89,7 +118,7 @@ const Page = () => {
                   <p className="text-gray-600 dark:text-gray-400 text-sm font-normal mr-5">
                     {coinInf.coin_smartContractAddress}
                   </p>
-                  <span onClick={() => { getCopy() }} className="cursor-pointer hover:scale-125">
+                  <span onClick={() =>  getCopy() } className="cursor-pointer hover:scale-125">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5"
@@ -170,7 +199,7 @@ const Page = () => {
                       className="mb-6 relative w-3/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                      <img className="w-6 h-6" src="/telegram-logo.png"></img>
+                        <img className="w-6 h-6" src="/telegram-logo.png"></img>
                       </span>
                       Telegram
                     </button>
@@ -188,7 +217,7 @@ const Page = () => {
                       className="mb-6 relative w-3/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                      <img className="w-6 h-6" src="/twitter-logo.png"></img>
+                        <img className="w-6 h-6" src="/twitter-logo.png"></img>
                       </span>
                       Twitter
                     </button>
@@ -249,7 +278,40 @@ const Page = () => {
 
               </div>
             </div>
-            {/* Card code block end */}
+
+
+          </div>
+        </div>
+        <div className="flex items-center w-full justify-center py-8">
+          <div className="max-w-sm rounded shadow bg-white dark:bg-gray-800">
+            <div className="flex">
+
+              <div className="px-6 py-5 text-center items-center justify-center">
+                <p className="text-xl font-bold leading-none text-gray-700 dark:text-gray-100">Vote Now! 🎉</p>
+                <div className="text-xl font-extrabold text-center bg-indigo-100 text-indigo-700 dark:text-indigo-600 rounded p-3 mt-6">
+                  {coinInf.coin_votes}
+                </div>
+                {session &&
+
+                  <div className="pt-4">
+                    <button
+                      onClick={() => upVote(coinInf.coin_name,coinInf.coin_votes)}
+                      className="py-4 px-6 text-xl font-semibold leading-3 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none text-white">VOTE</button>
+                  </div>
+                }
+                {!session &&
+                  <div className="pt-4">
+                    <button
+                      onClick={()=>{alert("You must Login for Vote!");router.push("/signin")}}
+                      className="py-4 px-6 text-xl font-semibold leading-3 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none text-white">VOTE</button>
+                  </div>
+                }
+              </div>
+
+              <div className="px-3">
+                <img className="w-36 h-36" src="https://www.kindpng.com/picc/m/29-298485_up-arrow-free-png-image-up-arrow-image.png" alt="medal" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
