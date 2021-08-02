@@ -63,11 +63,12 @@ function header() {
                 </div>
                 <div className="justify-center items-start min-w-full flex">
                     {searchBar && (
-                        <div className="mt-2 overflow-y-scroll max-h-64 justify-center flex-col absolute z-10  mx-2 md:mx-20 outline-none flex flex-grow items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-b-lg focus-within:text-gray-600 focus-within:shadow-md">
+                        <div className="mt-2 overflow-y-scroll max-h-64 w-72 justify-center flex-col absolute z-10  mx-2 md:mx-20 outline-none flex flex-grow items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-b-lg focus-within:text-gray-600 focus-within:shadow-md">
 
                             {filteredCoins.map((coin) => {
                                 return (
-                                    <a className="flex items-center justify-start w-full px-6 py-1 cursor-pointer mt-3 hover:bg-gray-300" href={`/coin/${coin.coin_name}`}>
+                                    <Link  href={`/coin/${coin.coin_name}`}>
+                                       <div className="flex items-center justify-start w-full px-6 py-1 cursor-pointer mt-3 hover:bg-gray-300"> 
                                         <div className="flex-shrink-0 h-10 w-10">
                                             <img
                                                 className="rounded-full hover:scale-125"
@@ -82,7 +83,8 @@ function header() {
                                                 {coin.coin_name}
                                             </div>
                                         </div>
-                                    </a>
+                                        </div>
+                                    </Link>
                                 )
                             })}
 
