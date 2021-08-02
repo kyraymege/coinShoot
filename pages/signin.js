@@ -1,10 +1,16 @@
 import { signIn, getCsrfToken, useSession } from "next-auth/client";
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 function signin({ csrfToken }) {
     const [session, loading] = useSession();
     const router = useRouter();
     return <>
+    <Head>
+        <title>CoinShooter | Sign In</title>
+        <meta name="coinshooter" content="Cryptocurrency vote system" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
         { session &&
             router.push("https://coinshooter.live")
         }

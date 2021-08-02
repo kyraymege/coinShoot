@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { db } from "../../components/firebase/firebase";
 import moment from "moment";
 import { useSession } from "next-auth/client";
+import Head from 'next/head';
 
 const Page = () => {
   const [coinInf, setCoinInf] = useState([
@@ -83,6 +84,11 @@ const Page = () => {
 
   return (
     <>
+    <Head>
+        <title>CoinShooter | {coinInf.coin_name}</title>
+        <meta name="coinshooter" content="Cryptocurrency vote system" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="w-full min-h-screen bg-gray-800 dark:bg-gray-900 py-24">
         <div className="container mx-auto px-6 flex items-start justify-center">
           <div className="w-full">
