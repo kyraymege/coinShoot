@@ -4,8 +4,10 @@ import moment from "moment";
 import { useSession } from "next-auth/client";
 import { useRouter } from 'next/router';
 
-const coinsRef = db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed");
+
 function table() {
+  const coinsRef = db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed");
+  var dd = moment(new Date()).format("DD/MM/YYYY");
   const router = useRouter();
   const [coins, setCoins] = useState([]);
   const [lastDoc, setLastDoc] = useState();
@@ -19,6 +21,63 @@ function table() {
     })
 
   }, []);
+  useEffect(() => {
+    if (activeStatus === 1) {
+      setIsEmpty(false);
+      coinsRef.limit(10).get().then((coinss) => {
+        const coinList = coinss.docs.map((doc) => ({
+          coin_name: doc.data().coin_name,
+          coin_symbol: doc.data().coin_symbol,
+          coin_marketcap: doc.data().coin_marketcap,
+          coin_chain: doc.data().coin_chain,
+          coin_age: doc.data().coin_age,
+          coin_votes: doc.data().coin_votes,
+          coin_imageUri: doc.data().coin_imageUri,
+          coin_status: doc.data().coin_status
+        }))
+        const lastDoc = coinss.docs[coinss.docs.length - 1];
+        setLastDoc(lastDoc);
+        setCoins(coinList)
+      })
+
+    }
+    if (activeStatus === 2) {
+      db.collection("coins").orderBy("coin_votes", "desc").where("coin_lastVoteDate", "==", dd.toString()).get().then((collections) => {
+        const coinList = collections.docs.map((doc) => ({
+          coin_name: doc.data().coin_name,
+          coin_symbol: doc.data().coin_symbol,
+          coin_marketcap: doc.data().coin_marketcap,
+          coin_chain: doc.data().coin_chain,
+          coin_age: doc.data().coin_age,
+          coin_votes: doc.data().coin_votes,
+          coin_imageUri: doc.data().coin_imageUri,
+          coin_status: doc.data().coin_status
+        }))
+        setCoins(coinList);
+        setIsEmpty(true);
+      })
+
+    }
+
+    if (activeStatus === 3) {
+      db.collection("coins").orderBy("coin_votes", "desc").where("coin_createdAt", "==", dd.toString()).get().then((collections) => {
+        const coinList = collections.docs.map((doc) => ({
+          coin_name: doc.data().coin_name,
+          coin_symbol: doc.data().coin_symbol,
+          coin_marketcap: doc.data().coin_marketcap,
+          coin_chain: doc.data().coin_chain,
+          coin_age: doc.data().coin_age,
+          coin_votes: doc.data().coin_votes,
+          coin_imageUri: doc.data().coin_imageUri,
+          coin_status: doc.data().coin_status
+        }))
+        setCoins(coinList);
+        setIsEmpty(true);
+      })
+    }
+
+
+  }, [activeStatus])
 
   const updateState = (collections) => {
     const isCollectionEmpty = collections.size === 0;
@@ -36,6 +95,7 @@ function table() {
       const lastDoc = collections.docs[collections.docs.length - 1];
       setCoins(coins => [...coins, ...coinList]);
       setLastDoc(lastDoc);
+      setIsEmpty(false);
     } else {
       setIsEmpty(true);
     }
@@ -48,7 +108,32 @@ function table() {
   }
 
   if (coins.length === 0) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="mx-auto container py-8 px-4 flex items-center justify-center w-full flex-col">
+        <ul className="w-full hidden md:flex items-center pb-2 border-b border-gray-200">
+          <li onClick={() => setActiveStatus(1)} className={activeStatus == 1 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded font-bold  text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer  bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+            All Coins 📢
+          </li>
+          <li onClick={() => setActiveStatus(2)} className={activeStatus == 2 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+            Today's Best 🔥
+          </li>
+          <li onClick={() => setActiveStatus(3)} className={activeStatus == 3 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+            Today Added 🆕
+          </li>
+        </ul>
+        
+        <div className="md:hidden relative w-11/12 mx-auto bg-white rounded">
+          <select onChange={(e) => { setActiveStatus(e.target.value); console.log(activeStatus); }} className="form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10">
+            <option value={1} selected className="text-sm text-gray-600">
+              All Coins 📢
+            </option>
+            <option value={2} className="text-sm text-gray-600">Today's Best 🔥 </option>
+            <option value={3} className="text-sm text-gray-600">Today Added 🆕 </option>
+          </select>
+        </div>
+        <h1 className="text-2xl font-extrabold text-white mt-12">No new coins have been added yet today!</h1>
+      </div>
+    )
   }
 
 
@@ -68,12 +153,12 @@ function table() {
           </li>
         </ul>
         <div className="md:hidden relative w-11/12 mx-auto bg-white rounded">
-          <select aria-label="Selected tab" className="form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10">
-            <option selected className="text-sm text-gray-600">
+          <select onChange={(e) => { setActiveStatus(e.target.value);}} className="form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10">
+            <option value={1} selected className="text-sm text-gray-600">
               All Coins 📢
             </option>
-            <option className="text-sm text-gray-600">Today's Best 🔥 </option>
-            <option className="text-sm text-gray-600">Today Added 🆕 </option>
+            <option value={2} className="text-sm text-gray-600">Today's Best 🔥 </option>
+            <option value={3} className="text-sm text-gray-600">Today Added 🆕 </option>
           </select>
         </div>
       </div>
@@ -128,15 +213,7 @@ function table() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {coins.filter(val => {
-                  if (text === "") {
-                    return val;
-                  } else if (
-                    val.coin_name.toLowerCase().includes(text.toLowerCase()) ||
-                    val.coin_symbol.toLowerCase().includes(text.toLowerCase())
-                  )
-                    return val
-                }).map((coin, index) => (
+                {coins.map((coin, index) => (
                   <tr
                     className="hover:bg-gray-400 cursor-pointer"
                     key={index}
@@ -207,13 +284,13 @@ function table() {
                     <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                       <div className="inline-flex">
                         <button
-                        onClick={() => router.push(`/coin/${coin.coin_name}`)}
-                        className="bg-gray-300 hover:bg-gray-200 text-blue-600 font-bold py-2 px-4 rounded-l">
+                          onClick={() => router.push(`/coin/${coin.coin_name}`)}
+                          className="bg-gray-300 hover:bg-gray-200 text-blue-600 font-bold py-2 px-4 rounded-l">
                           {coin.coin_votes}
                         </button>
-                        <button 
-                        onClick={() => router.push(`/coin/${coin.coin_name}`)}
-                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-r">
+                        <button
+                          onClick={() => router.push(`/coin/${coin.coin_name}`)}
+                          className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-r">
                           VOTE
                         </button>
                       </div>
@@ -227,9 +304,7 @@ function table() {
       </div>
       {isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" disabled="disabled">ᐅ All coins are listed ᐊ</button>}
       {!isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" onClick={() => fetchMore()}>▼ Show More ▼</button>}
-
     </div>
-
   );
 }
 

@@ -6,7 +6,7 @@ function AdvSection() {
             <h1 className="font-bold lg:text-4xl ml-10 text-3xl">Fastest and most reliable</h1>
             <h3 className="lg:text-2xl text-xl ml-10">The highest-rated cryptocurrency of all time is here!</h3>
             </div>
-            <Image className=" ml-10" src="/ad.gif" width={730} height={90}/>
+            <Image alt="banner" className=" ml-10" src="/ad.gif" width={730} height={90}/>
         </div>
     )
 }

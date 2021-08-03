@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useSession, signIn } from "next-auth/client"
 import { db } from "../components/firebase/firebase";
-import firebase from 'firebase/app';
+import moment from "moment";
 
 function addcoin() {
   const [session, loading] = useSession();
@@ -473,8 +473,9 @@ function addcoin() {
                                   coin_owner: session.user.email,
                                   coin_votes: 0,
                                   coin_status: "progress",
-                                  coin_createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                                  coin_createdAt: moment(new Date).format("DD/MM/YYYY"),
                                   coin_chart: coin_chartAddress,
+                                  coin_lastVoteDate: "",
                                 })
                                 .then(() => {
                                   alert(

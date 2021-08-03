@@ -6,7 +6,7 @@ function footer() {
             <div className="bg-gray-900">
                 <div className="mx-auto container pt-20 lg:pt-12 flex flex-col items-center justify-center">
                     <div>
-                <Image className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} />
+                <Image className="object-contain animate-pulse h-8 mb-1" src="/logo.png" alt="logo" height={80} width={200} />
                 </div>
                     <div className="text-white flex flex-col md:items-center f-f-l pt-3 items-center">
                         <h1 className="text-2xl font-black">Tired of getting scammed ?</h1>
@@ -17,7 +17,6 @@ function footer() {
                         <div className="my-6 lg:text-base text-color f-f-l text-center">
                             <ul className="md:flex items-center">
                                 <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">Add Coin</li>
-                                <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">Promote</li>
                                 <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">Contact</li>
                                 <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">All time Rankings</li>
                                 <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">Daily Rankings</li>
@@ -25,19 +24,19 @@ function footer() {
                             </ul>
                         </div>
                         <div className="text-sm text-color mb-10 f-f-l">
-                            <p> CoinShooter © 2021 - info@coinshooter.net</p>
+                            <p> CoinShooter © 2021 - info@coinshooter.live</p>
                         </div>
                     </div>
                     <div className="w-9/12  h-0.5 bg-gray-100 rounded-full" />
                     <div className="flex justify-between items-center pt-12">
                         <div className="mr-8">
-                        <a href="https://t.me/kyraymege" target="_blank"><Image className="object-contain animate-spin mb-1" src="/telegram-logo.png" height={36} width={36} /></a>
+                        <a href="https://t.me/kyraymege" target="_blank"><Image alt="telegram" className="object-contain animate-spin mb-1" src="/telegram-logo.png" height={36} width={36} /></a>
                         </div>
                         <div className="mr-4">
-                        <a href="https://twitter.com" target="_blank"><Image className="object-contain animate-spin mb-1" src="/twitter-logo.png" height={36} width={36} /></a>
+                        <a href="https://twitter.com" target="_blank"><Image alt="twitter" className="object-contain animate-spin mb-1" src="/twitter-logo.png" height={36} width={36} /></a>
                         </div>
                         <div className="mr-4">
-                        <a href="#" target="_blank"><Image className="object-contain animate-bounce mb-1" src="/googlePlay-logo.png" height={72} width={72} /></a>
+                        <a href="#" target="_blank"><Image alt="google" className="object-contain animate-bounce mb-1" src="/googlePlay-logo.png" height={72} width={72} /></a>
                         </div>
                         <div className="mr-4">
                             {/*AppStore*/}

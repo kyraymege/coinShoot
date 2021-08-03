@@ -44,15 +44,13 @@ const Page = () => {
         coin_discordAddress: doc.data().coin_discordAddress,
         coin_buyAddress: doc.data().coin_buyAddress,
         coin_smartContractAddress: doc.data().coin_smartContractAddress,
+        coin_createdAt: doc.data().coin_createdAt,
       });
     } 
   });
 
   const getCopy = () => {
-    const text = document.getElementById("smartContract");
-    text.select();
-    document.execCommand("copy");
-    alert("Coppied");
+    console.log(coinInf.coin_createdAt.toDate("DD/MM/YYYY"))
   }
 
   const upVote = (currentCoin,currentCoinVotes) => {
@@ -75,6 +73,7 @@ const Page = () => {
         );
         db.collection("coins").doc(currentCoin).update({
           coin_votes: currentCoinVotes +1,
+          coin_lastVoteDate: moment(new Date()).format("DD/MM/YYYY"),
         });
       }
     })
