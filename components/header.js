@@ -46,10 +46,12 @@ function header() {
             <div className="bg-gray-200 h-full w-full">
                 <nav className="w-full bg-gray-800 hidden xl:block shadow py-3 items-center">
                     <div className="container px-6 h-16 flex justify-between items-center lg:items-stretch mx-auto">
-                        <div className="flex items-center">
-                            <div className="mr-10 flex items-center">
-                                <a href="/" className="xl:ml-20"> <Image alt="logo" className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} /></a>
-                            </div>
+                        <div className="flex items-center">                            
+                                <div className="mr-10 flex items-center">
+                                    <a href="/" className="xl:ml-20"> <Image alt="logo" className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} /></a>
+                                </div>
+                            
+                            
                         </div>
                         <div className="mx-2 outline-none flex flex-col items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-lg focus-within:text-gray-600 focus-within:shadow-md ">
                             <div className="flex flex-row justify-center items-center">
@@ -113,7 +115,7 @@ function header() {
 
                 <nav>
                     <div className="py-4 px-6 w-full flex xl:hidden justify-between items-center bg-gray-800 fixed top-0 z-40">
-                        <div className="w-24">
+                        <div className={!show ? "w-24" : "hidden"}>
                             <a href="/" className="xl:ml-20"> <Image alt="logo" className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} /></a>
                         </div>
                         <div>
