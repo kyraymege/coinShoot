@@ -46,12 +46,12 @@ function header() {
             <div className="bg-gray-200 h-full w-full">
                 <nav className="w-full bg-gray-800 hidden xl:block shadow py-3 items-center">
                     <div className="container px-6 h-16 flex justify-between items-center lg:items-stretch mx-auto">
-                        <div className="flex items-center">                            
-                                <div className="mr-10 flex items-center">
-                                    <a href="/" className="xl:ml-20"> <Image alt="logo" className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} /></a>
-                                </div>
-                            
-                            
+                        <div className="flex items-center">
+                            <div className="mr-10 flex items-center">
+                                <a href="/" className="xl:ml-20"> <Image alt="logo" className="object-contain animate-pulse h-8 mb-1" src="/logo.png" height={80} width={200} /></a>
+                            </div>
+
+
                         </div>
                         <div className="mx-2 outline-none flex flex-col items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-lg focus-within:text-gray-600 focus-within:shadow-md ">
                             <div className="flex flex-row justify-center items-center">
@@ -172,7 +172,7 @@ function header() {
                                                     <div className="mt-2 overflow-y-scroll max-h-64 w-72 justify-center flex-col absolute z-10  mx-2 md:mx-20 outline-none flex flex-grow items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-b-lg focus-within:text-gray-600 focus-within:shadow-md">
                                                         {filteredCoins.map((coin) => {
                                                             return (
-                                                                <Link href={`/coin/${coin.coin_name}`}>
+                                                                <a href={`/coin/${coin.coin_name}`}>
                                                                     <div className="flex items-center justify-start w-full px-6 py-1 cursor-pointer mt-3 hover:bg-gray-300">
                                                                         <div className="flex-shrink-0 h-10 w-10">
                                                                             <img
@@ -189,7 +189,7 @@ function header() {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </Link>
+                                                                </a>
                                                             )
                                                         })}
                                                     </div>
@@ -197,14 +197,16 @@ function header() {
                                             </div>
                                         </div>
                                         <ul className="f-m-m">
-                                            <a className="cursor-pointer">
-                                                <li className="text-white pt-10">
+                                            <a href="/addcoin" className="cursor-pointer">
+                                                <li className="text-white pt-8">
                                                     <div className="flex items-center justify-center">
-                                                        <p className="text-indigo-700 text-2xl font-bold ml-3">Add Coin</p>
+                                                        <div className="flex items-center">
+                                                            <p className="text-white text-2xl font-bold ml-3">Add Coin</p>
+                                                        </div>
                                                     </div>
                                                 </li>
                                             </a>
-                                            <a className="cursor-pointer">
+                                            <a href="/contact" className="cursor-pointer">
                                                 <li className="text-white pt-8">
                                                     <div className="flex items-center justify-center">
                                                         <div className="flex items-center">

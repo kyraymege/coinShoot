@@ -126,7 +126,7 @@ const Page = () => {
                 </div>
               </div>
               <div className="w-full lg:w-1/3 p-6 border-t border-b lg:border-t-0 lg:border-b-0 sm:border-l sm:border-r border-gray-300">
-                <div className="flex flex-col items-start lg:items-center justify-between">
+                <div className="flex flex-col items-center lg:items-center justify-center text-center ">
                   <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-2">
                     Since to Launch
                   </h3>
@@ -134,7 +134,7 @@ const Page = () => {
                     {moment(coinInf.coin_age, "DD/MM/YYYY").fromNow()}
                   </div>
                 </div>
-                <div className="flex flex-col items-start lg:items-center justify-between">
+                <div className="flex flex-col items-center lg:items-center justify-center text-center ">
                   <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-2">
                     Chain
                   </h3>
@@ -142,7 +142,7 @@ const Page = () => {
                     {coinInf.coin_chain}
                   </div>
                 </div>
-                <div className="flex flex-col items-start lg:items-center justify-between">
+                <div className="flex flex-col items-center lg:items-center justify-center text-center ">
                   <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-2">
                     Market Cap
                   </h3>
@@ -150,7 +150,7 @@ const Page = () => {
                     $ {coinInf.coin_marketcap}
                   </div>
                 </div>
-                <div className="flex flex-col items-start lg:items-center justify-between">
+                <div className="flex flex-col items-center lg:items-center justify-center text-center ">
                   <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-2">
                     Price
                   </h3>

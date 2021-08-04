@@ -151,7 +151,7 @@ function table() {
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-b-none sm:rounded-t-lg ">
             <table className="min-w-full divide-y divide-gray-200 ">
               <thead className="bg-gray-50 ">
-                <tr>
+                <tr >
                   <th
                     scope="col"
                     className=" font-bold px-12 py-3 text-left text-xs text-gray-500 uppercase tracking-wider"
@@ -165,19 +165,19 @@ function table() {
                   </th>
                   <th
                     scope="col"
-                    className=" px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                    className=" px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider "
                   >
                     Symbol
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider "
                   >
                     Chain
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider "
                   >
                     Market Cap
                   </th>
@@ -238,7 +238,7 @@ function table() {
                       onClick={() => {
                         router.push("/coin/" + coin.coin_name);
                       }}
-                      className="px-6 py-4 whitespace-nowrap"
+                      className="px-6 py-4 whitespace-nowrap "
                     >
                       <span className="px-2 inline-flex text-xs leading-5  rounded-full bg-green-100 text-green-800 font-bold">
                         {coin.coin_chain}
@@ -248,7 +248,7 @@ function table() {
                       onClick={() => {
                         router.push("/coin/" + coin.coin_name);
                       }}
-                      className="px-6 py-4 whitespace-nowrap"
+                      className="px-6 py-4 whitespace-nowrap "
                     >
                       <div className="text-sm text-gray-900">
                         $ {coin.coin_marketcap}
@@ -258,7 +258,7 @@ function table() {
                       onClick={() => {
                         router.push("/coin/" + coin.coin_name);
                       }}
-                      className="px-12 py-4 whitespace-nowrap text-sm text-gray-500"
+                      className="px-12 py-4 whitespace-nowrap text-sm text-gray-500 "
                     >
                       <div className="text-sm text-gray-900">
                         {moment(coin.coin_age, "DD/MM/YYYY").fromNow()}
