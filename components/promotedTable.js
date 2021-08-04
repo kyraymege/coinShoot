@@ -47,25 +47,25 @@ function promotedtable() {
                   </th>
                   <th
                     scope="col"
-                    className=" px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                    className=" px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider xl:table-cell lg:table-cell md:table-cell hidden"
                   >
                     Symbol
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider xl:table-cell lg:table-cell md:table-cell hidden "
                   >
                     Chain
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider xl:table-cell lg:table-cell md:table-cell hidden"
                   >
                     Market Cap
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider xl:table-cell lg:table-cell md:table-cell hidden"
                   >
                     Time since launch
                   </th>
@@ -110,7 +110,7 @@ function promotedtable() {
                       onClick={() => {
                         router.push("/coin/" + coin.coin_name);
                       }}
-                      className="px-8 py-4 whitespace-nowrap"
+                      className="px-8 py-4 whitespace-nowrap xl:table-cell lg:table-cell md:table-cell hidden"
                     >
                       <div className="text-sm font-medium text-gray-900">
                         ${coin.coin_symbol}
@@ -120,7 +120,7 @@ function promotedtable() {
                       onClick={() => {
                         router.push("/coin/" + coin.coin_name);
                       }}
-                      className="px-6 py-4 whitespace-nowrap"
+                      className="px-6 py-4 whitespace-nowrap xl:table-cell lg:table-cell md:table-cell hidden"
                     >
                       <span className="px-2 inline-flex text-xs leading-5  rounded-full bg-green-100 text-green-800 font-bold">
                         {coin.coin_chain}
@@ -130,7 +130,7 @@ function promotedtable() {
                       onClick={() => {
                         router.push("/coin/" + coin.coin_name);
                       }}
-                      className="px-6 py-4 whitespace-nowrap"
+                      className="px-6 py-4 whitespace-nowrap xl:table-cell lg:table-cell md:table-cell hidden"
                     >
                       <div className="text-sm text-gray-900">
                         $ {coin.coin_marketcap}
@@ -140,7 +140,7 @@ function promotedtable() {
                       onClick={() => {
                         router.push("/coin/" + coin.coin_name);
                       }}
-                      className="px-12 py-4 whitespace-nowrap text-sm text-gray-500"
+                      className="px-12 py-4 whitespace-nowrap text-sm text-gray-500 xl:table-cell lg:table-cell md:table-cell hidden"
                     >
                       <div className="text-sm text-gray-900">
                         {moment(coin.coin_age, "DD/MM/YYYY").fromNow()}
