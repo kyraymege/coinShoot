@@ -46,44 +46,42 @@ const Page = () => {
         coin_smartContractAddress: doc.data().coin_smartContractAddress,
         coin_createdAt: doc.data().coin_createdAt,
       });
-    } 
+    }
   });
 
   const getCopy = () => {
-    console.log(coinInf.coin_createdAt.toDate("DD/MM/YYYY"))
+    alert("Coppied");
   }
 
-  const upVote = (currentCoin,currentCoinVotes) => {
+  const upVote = (currentCoin, currentCoinVotes) => {
     db.collection("votes").doc(currentCoin).get().then((doc) => {
       var users = doc.data().users;
-      for (let i = 0; i < users.length ; i++) {
+      for (let i = 0; i < users.length; i++) {
         if (users[i] === session.user.email) {
           isVoted = true;
-        } else {
-          isVoted = false;
         }
       }
-      if(isVoted){
+      if (isVoted) {
         alert("You can vote once.")
-      }else{
+      } else {
         users.push(session.user.email);
         db.collection("votes").doc(currentCoin).set({
           users
         }
         );
         db.collection("coins").doc(currentCoin).update({
-          coin_votes: currentCoinVotes +1,
+          coin_votes: currentCoinVotes + 1,
           coin_lastVoteDate: moment(new Date()).format("DD/MM/YYYY"),
         });
       }
     })
-    
+
   }
 
 
   return (
     <>
-    <Head>
+      <Head>
         <title>CoinShooter | {coinInf.coin_name}</title>
         <meta name="coinshooter" content="Cryptocurrency vote system" />
         <link rel="icon" href="/favicon.ico" />
@@ -113,27 +111,18 @@ const Page = () => {
                 <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-1 whitespace-pre-line">
                   Description
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm font-normal">
+                <p className="text-gray-600 break-words dark:text-gray-400 text-sm font-normal">
                   {coinInf.coin_description}
                 </p>
-                <h3 className="text-lg text-gray-800 dark:text-gray-100 font-bold mt-5 mb-1">
-                  Smart Contract address
-                </h3>
-                <div className="text-xs text-center w-full bg-gray-300 dark:text-indigo-600 rounded font-medium p-3 lg:mr-3 flex-row flex">
-                  <p className="text-gray-600 dark:text-gray-400 text-sm font-normal mr-5">
-                    {coinInf.coin_smartContractAddress}
-                  </p>
-                  <span onClick={() =>  getCopy() } className="cursor-pointer hover:scale-125">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                      <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                    </svg>
-                  </span>
+
+                <div className="flex flex-col items-start lg:items-center justify-start mt-6">
+                  <h3 className="text-lg text-gray-800 font-bold mt-5 mb-1 text-left">
+                    Smart Contract address
+                  </h3>
+                  <div onClick={()=>getCopy()} className="cursor-pointer text-xs break-words w-full bg-indigo-100 text-indigo-700 rounded font-medium p-3 lg:mr-3 text-center">
+                    <p id="smart">{coinInf.coin_smartContractAddress}</p>                  
+                  </div>
+
                 </div>
               </div>
               <div className="w-full lg:w-1/3 p-6 border-t border-b lg:border-t-0 lg:border-b-0 sm:border-l sm:border-r border-gray-300">
@@ -300,14 +289,14 @@ const Page = () => {
 
                   <div className="pt-4">
                     <button
-                      onClick={() => upVote(coinInf.coin_name,coinInf.coin_votes)}
+                      onClick={() => upVote(coinInf.coin_name, coinInf.coin_votes)}
                       className="py-4 px-6 text-xl font-semibold leading-3 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none text-white">VOTE</button>
                   </div>
                 }
                 {!session &&
                   <div className="pt-4">
                     <button
-                      onClick={()=>{alert("You must Login for Vote!");router.push("/signin")}}
+                      onClick={() => { alert("You must Login for Vote!"); router.push("/signin") }}
                       className="py-4 px-6 text-xl font-semibold leading-3 bg-blue-600 rounded hover:bg-blue-500 focus:outline-none text-white">VOTE</button>
                   </div>
                 }

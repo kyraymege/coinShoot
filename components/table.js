@@ -109,29 +109,21 @@ function table() {
 
   if (coins.length === 0) {
     return (
-      <div className="mx-auto container py-8 px-4 flex items-center justify-center w-full flex-col">
-        <ul className="w-full hidden md:flex items-center pb-2 border-b border-gray-200">
-          <li onClick={() => setActiveStatus(1)} className={activeStatus == 1 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded font-bold  text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer  bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
-            All Coins 📢
-          </li>
-          <li onClick={() => setActiveStatus(2)} className={activeStatus == 2 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
-            Today's Best 🔥
-          </li>
-          <li onClick={() => setActiveStatus(3)} className={activeStatus == 3 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
-            Today Added 🆕
-          </li>
-        </ul>
-        
-        <div className="md:hidden relative w-11/12 mx-auto bg-white rounded">
-          <select onChange={(e) => { setActiveStatus(e.target.value); console.log(activeStatus); }} className="form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10">
-            <option value={1} selected className="text-sm text-gray-600">
+      <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
+        <div className="mx-auto flex-col container py-8 px-4 flex items-center justify-center w-full">
+          <ul className="w-full flex items-center pb-2 border-b border-gray-200">
+            <li onClick={() => setActiveStatus(1)} className={activeStatus == 1 ? "py-2 px-4 xl:mr-10 mr-4  cursor-pointer bg-indigo-100 ease-in duration-150 rounded font-bold  text-xs lg:text-lg md:text-md xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 text-center cursor-pointer  bg-transparent hover:bg-gray-300 ease-in duration-150 rounded text-xs lg:text-lg md:text-md xl:text-lg leading-none text-white"}>
               All Coins 📢
-            </option>
-            <option value={2} className="text-sm text-gray-600">Today's Best 🔥 </option>
-            <option value={3} className="text-sm text-gray-600">Today Added 🆕 </option>
-          </select>
+            </li>
+            <li onClick={() => setActiveStatus(2)} className={activeStatus == 2 ? "py-2 px-4 xl:mr-10 xl:ml-10 ml-4 mr-4  cursor-pointer bg-indigo-100 ease-in duration-150 rounded  font-bold   text-xs lg:text-lg md:text-md xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 text-center cursor-pointer  bg-transparent hover:bg-gray-300 ease-in duration-150 rounded text-xs lg:text-lg md:text-md xl:text-lg leading-none text-white"}>
+              Today's Best 🔥
+            </li>
+            <li onClick={() => setActiveStatus(3)} className={activeStatus == 3 ? "py-2 px-4 xl:ml-10 ml-4   cursor-pointer bg-indigo-100 ease-in duration-150 rounded  font-bold   text-xs lg:text-lg md:text-md xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4  text-center cursor-pointer  bg-transparent hover:bg-gray-300 ease-in duration-150 rounded text-xs lg:text-lg md:text-md xl:text-lg leading-none text-white"}>
+              Today Added 🆕
+            </li>
+          </ul>
+          <h1 className="text-2xl font-extrabold text-white mt-12">No new coins have been added yet today!</h1>
         </div>
-        <h1 className="text-2xl font-extrabold text-white mt-12">No new coins have been added yet today!</h1>
       </div>
     )
   }
@@ -141,26 +133,17 @@ function table() {
   return (
     <div className="flex flex-col max-w-screen-2xl mx-auto p-10">
       <div className="mx-auto container py-8 px-4 flex items-center justify-center w-full">
-        <ul className="w-full hidden md:flex items-center pb-2 border-b border-gray-200">
-          <li onClick={() => setActiveStatus(1)} className={activeStatus == 1 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded font-bold  text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer  bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+        <ul className="w-full flex items-center pb-2 border-b border-gray-200">
+          <li onClick={() => setActiveStatus(1)} className={activeStatus == 1 ? "py-2 px-4 xl:mr-10 mr-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded font-bold  text-xs lg:text-lg md:text-md xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 text-center cursor-pointer text-xs lg:text-lg md:text-md xl:text-lg  bg-transparent hover:bg-gray-300 ease-in duration-150 rounded leading-none text-white"}>
             All Coins 📢
           </li>
-          <li onClick={() => setActiveStatus(2)} className={activeStatus == 2 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+          <li onClick={() => setActiveStatus(2)} className={activeStatus == 2 ? "py-2 px-4 xl:mr-10 xl:ml-10 ml-4 mr-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded  font-bold   text-xs lg:text-lg md:text-md xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 text-center cursor-pointer  bg-transparent hover:bg-gray-300 ease-in duration-150 rounded text-xs lg:text-lg md:text-md xl:text-lg leading-none text-white"}>
             Today's Best 🔥
           </li>
-          <li onClick={() => setActiveStatus(3)} className={activeStatus == 3 ? "py-2 px-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded ml-24 font-bold   text-lg xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4 cursor-pointer ml-24 bg-transparent hover:bg-indigo-50 ease-in duration-150 rounded text-md xl:text-md leading-none text-white"}>
+          <li onClick={() => setActiveStatus(3)} className={activeStatus == 3 ? "py-2 px-4 xl:ml-10 ml-4 cursor-pointer bg-indigo-100 ease-in duration-150 rounded  font-bold   text-xs lg:text-lg md:text-md xl:text-lg leading-none text-center text-indigo-700" : "py-2 px-4  text-center flex-col cursor-pointer  bg-transparent hover:bg-gray-300 ease-in duration-150 rounded text-xs lg:text-lg md:text-md xl:text-lg leading-none text-white"}>
             Today Added 🆕
           </li>
         </ul>
-        <div className="md:hidden relative w-11/12 mx-auto bg-white rounded">
-          <select onChange={(e) => { setActiveStatus(e.target.value);}} className="form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10">
-            <option value={1} selected className="text-sm text-gray-600">
-              All Coins 📢
-            </option>
-            <option value={2} className="text-sm text-gray-600">Today's Best 🔥 </option>
-            <option value={3} className="text-sm text-gray-600">Today Added 🆕 </option>
-          </select>
-        </div>
       </div>
 
       <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
