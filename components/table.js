@@ -14,6 +14,7 @@ function table() {
   const [isEmpty, setIsEmpty] = useState(false);
   const [activeStatus, setActiveStatus] = useState(1);
   const [text, setText] = useState("");
+  const [votes, setVotes] = useState([]);
 
   useEffect(() => {
     coinsRef.limit(10).onSnapshot((collections) => {
@@ -42,14 +43,14 @@ function table() {
 
     }
     if (activeStatus === 2) {
-      db.collection("coins").orderBy("coin_votes", "desc").where("coin_lastVoteDate", "==", dd.toString()).get().then((collections) => {
+      db.collection("coins").orderBy("coin_votes", "desc").where("coin_lastVoteDate", "==", dd.toString()).get().then((collections) => {        
         const coinList = collections.docs.map((doc) => ({
           coin_name: doc.data().coin_name,
           coin_symbol: doc.data().coin_symbol,
           coin_marketcap: doc.data().coin_marketcap,
           coin_chain: doc.data().coin_chain,
           coin_age: doc.data().coin_age,
-          coin_votes: doc.data().coin_votes,
+          coin_votes: doc.data().coin_todayVotes,
           coin_imageUri: doc.data().coin_imageUri,
           coin_status: doc.data().coin_status
         }))

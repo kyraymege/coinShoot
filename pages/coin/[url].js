@@ -72,16 +72,9 @@ const Page = () => {
         
         db.collection("coins").doc(currentCoin).update({
           coin_votes: currentCoinVotes + 1,
+          coin_todayVotes: +1,
           coin_lastVoteDate: moment(new Date()).format("DD/MM/YYYY"),
-        });
-
-        db.collection("todayVotes").doc(currentCoin).get().then((doc)=>{
-          db.collection("todayVotes").doc(currentCoin).update({
-            coin_votes: doc.data().coin_votes + 1,
-          });
-        })
-
-        
+        });     
       }
     })
 
