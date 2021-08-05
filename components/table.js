@@ -60,7 +60,7 @@ function table() {
     }
 
     if (activeStatus === 3) {
-      db.collection("coins").orderBy("coin_votes", "desc").where("coin_createdAt", "==", dd.toString()).get().then((collections) => {
+      db.collection("coins").orderBy("coin_votes", "desc").where("coin_status", "==", "listed").where("coin_createdAt", "==", dd.toString()).get().then((collections) => {
         const coinList = collections.docs.map((doc) => ({
           coin_name: doc.data().coin_name,
           coin_symbol: doc.data().coin_symbol,
@@ -276,9 +276,9 @@ function table() {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
-        </div>
+            </table>            
+          </div>          
+        </div>        
       </div>
       {isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" disabled="disabled">ᐅ All coins are listed ᐊ</button>}
       {!isEmpty && <button className="bg-white text-black text-lg font-medium rounded-b-2xl focus-within:outline-none" onClick={() => fetchMore()}>▼ Show More ▼</button>}
