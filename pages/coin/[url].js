@@ -60,7 +60,7 @@ const Page = () => {
         if (users[i] === session.user.email) {
           isVoted = true;
         }
-      }
+      }        
       if (isVoted) {
         alert("You can vote once.")
       } else {
@@ -68,11 +68,20 @@ const Page = () => {
         db.collection("votes").doc(currentCoin).set({
           users
         }
-        );
+        );    
+        
         db.collection("coins").doc(currentCoin).update({
           coin_votes: currentCoinVotes + 1,
           coin_lastVoteDate: moment(new Date()).format("DD/MM/YYYY"),
         });
+
+        db.collection("todayVotes").doc(currentCoin).get().then((doc)=>{
+          db.collection("todayVotes").doc(currentCoin).update({
+            coin_votes: doc.data().coin_votes + 1,
+          });
+        })
+
+        
       }
     })
 
